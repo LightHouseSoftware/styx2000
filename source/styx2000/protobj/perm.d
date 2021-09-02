@@ -9,7 +9,7 @@ private {
 }
 
 public {
-	import styx2000.protoconst.fsmodes;
+	import styx2000.protoconst.permissions;
 }
 
 // tag identificator
