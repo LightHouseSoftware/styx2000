@@ -5,6 +5,8 @@ private {
 	
 	import styx2000.lowlevel.endianness;
 	
+	import styx2000.protoconst.base : STYX_NOTAG;
+	
 	import styx2000.protobj.styxobject;
 }
 
@@ -18,7 +20,7 @@ class Tag : StyxObject
 	}
 	
 	// create from value
-	this(ushort tag = 0xFFFF)
+	this(ushort tag = STYX_NOTAG)
 	{
 		_tag = tag;
 		_representation = toLEBytes!ushort(tag);

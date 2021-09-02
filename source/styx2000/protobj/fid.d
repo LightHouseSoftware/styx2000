@@ -5,6 +5,8 @@ private {
 
 	import styx2000.lowlevel.endianness;
 	
+	import styx2000.protoconst.base : STYX_NOFID;
+	
 	import styx2000.protobj.styxobject;
 }
 
@@ -18,7 +20,7 @@ class Fid : StyxObject
 	}
 	
 	// create from value
-	this(uint fid = 0xFFFFFFFF)
+	this(uint fid = STYX_NOFID)
 	{
 		_fid = fid;
 		_representation = toLEBytes!uint(fid);

@@ -6,11 +6,10 @@ private {
 	import styx2000.lowlevel.endianness;
 	import styx2000.lowlevel.vls;
 	
-	import styx2000.protobj.styxobject;
+	import styx2000.protoconst.base : STYX_VERSION;
 	
 	import styx2000.protobj.name;
-	
-	import styx2000.protoconst.protocol;
+	import styx2000.protobj.styxobject;
 }
 
 // error message
@@ -20,8 +19,8 @@ class Version : Name
 	{
 		if (name == "")
 		{
-			_name = "9P2000";
-			_representation = cast(ubyte[]) [6, 0] ~ STYX_VERSION;
+			_name = STYX_VERSION;
+			_representation = cast(ubyte[]) [6, 0] ~ cast(ubyte[]) STYX_VERSION;
 		}
 		else
 		{
