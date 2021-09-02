@@ -12,7 +12,7 @@ private {
 }
 
 public {
-	import styx2000.protoconst.qidtypes;
+	import styx2000.protoconst.qids;
 }
 
 // aqid identificator (unique number on server)
