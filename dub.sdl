@@ -1,5 +1,5 @@
 name "styx2000"
 description "Low-level, minimal implementation of Styx protocol (9P protocol from Plan 9/Inferno)"
-authors "aquaratixc"
+authors "Oleg Bakharev" "Ilya Pertsev" "LightHouse Software"
 copyright "Copyright © 2021, aquaratixc"
 license "proprietary"
