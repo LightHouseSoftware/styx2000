@@ -27,7 +27,7 @@ class Data : StyxObject
 	}
 	
 	// setter
-	void setData(ubyte[] data)
+	void setData(ubyte[] data...)
 	{
 		_representation = data;
 	}
