@@ -44,24 +44,28 @@ private {
 }
 
 // create message range (in byte form) from bytes
-alias byRawMessage = function(ubyte[] bytes...) {
+auto byRawMessage(ubyte[] bytes...) 
+{
 	return ByteMessageRange(bytes);
-};
+}
 
 // create StyxObject range from bytes
-alias byStyxMessage = function(ubyte[] bytes...) {
+auto byStyxMessage(ubyte[] bytes...) 
+{
 	return bytes.byRawMessage.map!decode;
-};
+}
 
 // create string representation for entire StyxObject array
-alias toTextObject = function(StyxObject[] msg) {
+auto toTextObject(StyxObject[] msg) 
+{
 	return msg
 			.to!string
 			.replace(`[`, `{`)
 			.replace(`]`, `}`);
-};
+}
 
 // create string representation range from bytes
-alias byTextMessage = function(ubyte[] bytes...) {
+auto byTextMessage(ubyte[] bytes...) 
+{
 	return bytes.byStyxMessage.map!toTextObject;
-};
+}
