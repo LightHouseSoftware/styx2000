@@ -2,6 +2,43 @@
 Low-level, minimal implementation of Styx protocol (9P protocol from Plan 9/Inferno).
 
 # Examples
+### Working with basic protocol structures
+In this example, we consider a method for unpacking a certain data structure, which is some aspect of the Styx protocol from its low-level representation into a data object and vice versa. 
+It looks like this:
+```d
+#!/usr/bin/env dub
+/+ dub.sdl:
+	dependency "styx2000" version="~main"
++/
+
+import std.stdio : writeln, writefln;
+    
+import styx2000.extrautil;
+import styx2000.protobj;
+import styx2000.protomsg;
+
+void main()
+{
+	// sample byte array for dirstat
+	ubyte[] data = [66, 0, 77, 0, 18, 0, 0, 0, 0, 253, 111, 52, 97, 102, 3, 16, 0, 0, 0, 3, 8, 180, 1, 0, 0, 239, 111, 52, 97, 253, 111, 52, 97, 18, 0, 0, 0, 0, 0, 0, 0, 3, 0, 97, 98, 99, 8, 0, 97, 113, 117, 97, 114, 101, 106, 105, 8, 0, 97, 113, 117, 97, 114, 101, 106, 105, 0, 0, 70, 0, 77, 0, 18, 0, 0, 0, 0, 79, 112, 52, 97, 100, 3, 16, 0, 0, 0, 3, 8, 180, 1, 0, 0, 79, 112, 52, 97, 79, 112, 52, 97, 28, 0, 0, 0, 0, 0, 0, 0, 7, 0, 116, 109, 112, 46, 116, 120, 116, 8, 0, 97, 113, 117, 97, 114, 101, 106, 105, 8, 0, 97, 113, 117, 97, 114, 101, 106, 105, 0, 0];
+	DirStat ds = new DirStat;
+	// restore from byte view
+	ds.unpack(data);
+	ds.writeln;
+	
+	// another sample for restoring structure
+	Dir d = new Dir;
+	d.unpack([66, 0, 77, 0, 18, 0, 0, 0, 0, 253, 111, 52, 97, 102, 3, 16, 0, 0, 0, 3, 8, 180, 1, 0, 0, 239, 111, 52, 97, 253, 111, 52, 97, 18, 0, 0, 0, 0, 0, 0, 0, 3, 0, 97, 98, 99, 8, 0, 97, 113, 117, 97, 114, 101, 106, 105, 8, 0, 97, 113, 117, 97, 114, 101, 106, 105, 0, 0]);
+	d.writeln;
+	// explicit conversion to byte representation
+	d.pack.writeln;
+}
+```
+The source file for this example can be compiled with the command:
+```
+dub build --single dir.d
+```
+
 ### Parsing the file with the captured stream from the client to the server
 The source file for the example is compiled with the command:
 ```
