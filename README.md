@@ -2,7 +2,7 @@
 Low-level, minimal implementation of Styx protocol (9P protocol from Plan 9/Inferno).
 
 # Examples
-## Parsing the file with the captured stream from the client to the server
+### Parsing the file with the captured stream from the client to the server
 The source file for the example is compiled with the command:
 ```
 dub build --single styxdecoder.d
