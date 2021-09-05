@@ -70,7 +70,7 @@ class DirStat : StyxObject
 		while (_contents.length != 0)
 		{
 			auto dirSize = fromLEBytes!ushort(_contents[0..2]) + 2;
-			auto dir = VariableLengthSequence.pack(_contents[0..dirSize]);
+			auto dir = _contents[0..dirSize];
 			Dir d = new Dir;
 			d.unpack(dir);
 			_dirs ~= d;
@@ -82,7 +82,7 @@ class DirStat : StyxObject
 	override string toString()
 	{
 		return format(
-			`DirStat(wmname="%s")`,
+			`DirStat(dirs=%s)`,
 			_dirs.to!string
 		);
 	}
