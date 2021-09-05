@@ -69,13 +69,6 @@ Content of styxdecoder.d file:
 	dependency "styx2000" version="~main"
 +/
 
-// отключить управление сборщиком мусора из командной строки
-extern(C) __gshared bool rt_cmdline_enabled = false;
-// отключить управление сборщиком мусора из переменных окружения 
-extern(C) __gshared bool rt_envvars_enabled = false;
-// настройка сборщика мусора - начальный резерв 50 Мб, отключение профилирования
-extern(C) __gshared string[] rt_options = [ "gcopt=initReserve:50 profile:0" ];
-
 private
 {
     import std.algorithm : remove;
