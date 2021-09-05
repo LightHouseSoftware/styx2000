@@ -21,7 +21,6 @@ private {
 	import styx2000.extrautil.msgranges : byTextMessage;
 }
 
-// считывание файла в массив байтов
 alias readBinaryFile = function(string filename) {
 	static import std.file;
 	return cast(ubyte[]) std.file.read(filename);
