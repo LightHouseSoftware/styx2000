@@ -25,13 +25,27 @@ private {
 			_bytes = bytes;
 		}
 		
-		bool empty() @property const {
-			return (_bytes.length == 0);
+		bool empty() @property {
+			bool isEmpty;
+			// if range contains valid message size marker
+			if (_bytes.length > 4)
+			{
+				// message marker
+				_size = fromLEBytes!uint(_bytes[0..4]);
+				// if rest's length greather than real length
+				if (_size > _bytes.length)
+				{
+					isEmpty = true;
+				}
+			}
+			else
+			{
+				isEmpty = true;
+			}
+			return isEmpty;
 		}
 		
 		ubyte[] front() {
-
-			_size = fromLEBytes!uint(_bytes[0..4]);
 			_message = _bytes[0.._size];
 			return _message;
 		}
