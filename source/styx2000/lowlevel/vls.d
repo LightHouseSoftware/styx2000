@@ -1,7 +1,7 @@
 module styx2000.lowlevel.vls;
 
 private {
-	import styx2000.lowlevel.endianness;
+	import styx2000.lowlevel.endianness : fromLEBytes, toLEBytes;
 }
 
 // variable-length sequence (VLS) in 9P format
