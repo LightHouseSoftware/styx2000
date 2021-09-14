@@ -37,13 +37,13 @@ auto encode(StyxObject[] msg)
 			}
 			
 			auto type = fromStyxObject!Type(msg[1]);
-			if (size is null)
+			if (type is null)
 			{
 				throw new Exception(`Bad message content: wrong Type object`);
 			}
 			
 			auto tag = fromStyxObject!Tag(msg[2]);
-			if (size is null)
+			if (tag is null)
 			{
 				throw new Exception(`Bad message content: wrong Tag object`);
 			}
