@@ -207,27 +207,27 @@ class Stat : StyxObject
 		return _mtime;
 	}
 	
-	ulong setLength()
+	ulong getLength()
 	{
 		return _length;
 	}
 	
-	string setName()
+	string getName()
 	{
 		return _name;
 	}
 	
-	string setUid()
+	string getUid()
 	{
 		return _uid;
 	}
 	
-	string setGid()
+	string getGid()
 	{
 		return _gid;
 	}
 	
-	string setMuid()
+	string getMuid()
 	{
 		return _muid;
 	}
