@@ -94,7 +94,7 @@ alias Rwstat = Tuple!(Size, Type, Tag);
 // is one of StyxObject class ?
 template isStyxObject(T)
 {
-	enum bool isStyxObject = is(T == Afid) || is(T : Qid) || is(T == Count)||is(T == Data) || is(T : Name) || is(T : Fid) || is(T == Iounit) || 
+	enum bool isStyxObject = is(T == Afid) || is(T : Qid) || is(T == Count)|| is(T == Data) || is(T : Name) || is(T : Fid) || is(T == Iounit) || 
 							 is(T == Mode) || is(T == Msize) || is(T == Nwname) || is(T == Nwqid) || is(T == Offset) || is(T == Perm) || 
 							 is(T == Size) || is(T == Stat) || is(T == Tag) || is(T == Type) || is(T == Version); 
 }
