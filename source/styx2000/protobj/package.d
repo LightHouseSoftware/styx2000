@@ -12,6 +12,7 @@ public {
 	import styx2000.protobj.mode;
 	import styx2000.protobj.msize;
 	import styx2000.protobj.name;
+	import styx2000.protobj.newfid;
 	import styx2000.protobj.nwname;
 	import styx2000.protobj.nwqid;
 	import styx2000.protobj.qid;

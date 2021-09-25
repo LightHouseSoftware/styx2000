@@ -63,6 +63,3 @@ class Fid : StyxObject
 	
 	alias pack this;
 }
-
-// pseudoname for NewFid element for convenience
-alias NewFid = Fid;
