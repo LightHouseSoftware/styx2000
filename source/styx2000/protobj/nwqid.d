@@ -47,6 +47,7 @@ class Nwqid : StyxObject
 	this(Qid[] nwqid = [])
 	{
 		_nwqid = nwqid;
+		_representation = [];
 		updateQids;
 	}
 	
@@ -66,6 +67,7 @@ class Nwqid : StyxObject
 	void setQid(Qid[] nwqid...)
 	{
 		_nwqid = nwqid;
+		_representation = [];
 		updateQids;
 	}
 	
