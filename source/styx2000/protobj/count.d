@@ -16,6 +16,8 @@ class Count : Size
 		super(size);
 	}
 	
+	alias getCount = getSize;
+	
 	// string representation
 	override string toString()
 	{
