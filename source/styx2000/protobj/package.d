@@ -16,6 +16,7 @@ public {
 	import styx2000.protobj.nwname;
 	import styx2000.protobj.nwqid;
 	import styx2000.protobj.qid;
+	import styx2000.protobj.oldtag;
 	import styx2000.protobj.offset;
 	import styx2000.protobj.perm;
 	import styx2000.protobj.size;
