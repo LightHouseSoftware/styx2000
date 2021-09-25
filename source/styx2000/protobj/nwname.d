@@ -48,12 +48,14 @@ class Nwname : StyxObject
 	this(string[] nwname = [])
 	{
 		_nwname = nwname;
+		_representation = [];
 		updateNames;
 	}
 	
 	void setName(string[] nwname...)
 	{
 		_nwname = nwname;
+		_representation = [];
 		updateNames;
 	}
 	
