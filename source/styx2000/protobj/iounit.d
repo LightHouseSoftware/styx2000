@@ -35,7 +35,7 @@ class Iounit : StyxObject
 	A constructor that creates an object of the Iounit class with the given parameter in the form of unsigned value. 
 	If called without parameters, then the default parameter is zero. 
     Params:
-    iounit = Unsigned value for representing iounit.
+    iounit = Maximal size for atomic I/O operations.
     
     Typical usage:
     ----
