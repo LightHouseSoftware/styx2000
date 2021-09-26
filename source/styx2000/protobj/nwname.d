@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+A type for representing the name object of the 9P / Styx protocol. 
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev
+*/
 module styx2000.protobj.nwname;
 
 private {
@@ -11,7 +21,11 @@ private {
 	import styx2000.protobj.styxobject;
 }
 
-// name for walking
+/**
+	A class that provides a type for the Nwname field in some Styx messages. Inherits methods from the StyxObject class. 
+	See_Also:
+		https://web.archive.org/web/20201029184954/https://powerman.name/Inferno/man/5/0intro.html
+*/
 class Nwname : StyxObject
 {
 	protected {
@@ -44,7 +58,17 @@ class Nwname : StyxObject
 		}
 	}
 	
-	// create from value
+	/**
+	A constructor that creates an object of the Nwname class with the given parameter in the form of string's array. 
+	If called without parameters, then the default parameter is empty string's array. 
+    Params:
+    nwname = Full file path as string's array.
+    
+    Typical usage:
+    ----
+    Nwname aname = new Nwname([`test`]);
+    ----
+    */
 	this(string[] nwname = [])
 	{
 		_nwname = nwname;
@@ -52,6 +76,7 @@ class Nwname : StyxObject
 		updateNames;
 	}
 	
+	/// Set name to Nwname objects as string's array
 	void setName(string[] nwname...)
 	{
 		_nwname = nwname;
@@ -59,28 +84,30 @@ class Nwname : StyxObject
 		updateNames;
 	}
 	
-	// number of names in path
+	/// Number of names in path
 	ushort countOfNames()
 	{
 		return fromLEBytes!ushort(_representation[0..2]);
 	}
 
-	// all names in path
+	/// Get all names in path as string's array
 	string[] getName()
 	{
 		return _nwname;
 	}
 	
+	/// An alias that allows you to call a getter method without accessing the base Name class
 	alias getNwname = getName;	
+	/// An alias that allows you to call a setter method without accessing the base Name class
 	alias setNwname = setName;	
 	
-	// pack to bytes array
+	/// Pack to bytes array
 	ubyte[] pack()
 	{
 		return _representation;
 	}
 	
-	// unpack from bytes array
+	/// Unpack from bytes array
 	void unpack(ubyte[] bytes...)
 	{
 		_representation = bytes;
@@ -98,7 +125,7 @@ class Nwname : StyxObject
 		}
 	}
 	
-	// string representation
+	/// Convenient string representation of an object for printing 
 	override string toString()
 	{
 		return format(
@@ -108,5 +135,6 @@ class Nwname : StyxObject
 		);
 	}
 	
+	/// An alias for easier packing into a byte array without having to manually call the pack() method
 	alias pack this;
 }
