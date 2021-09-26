@@ -21,7 +21,7 @@ private {
 }
 
 /**
-	A class that provides a type for the fid field in some Styx messages. Inherits methods from the Fid class and the StyxObject class. 
+	A class that provides a type for the fid field in some Styx messages. Inherits methods from the StyxObject class. 
 	See_Also:
 		https://web.archive.org/web/20201029184954/https://powerman.name/Inferno/man/5/0intro.html
 */
@@ -34,14 +34,14 @@ class Fid : StyxObject
 	}
 	
 	/**
-	A constructor that creates an object of the Afid class with the given parameter in the form of some integer value representing fid. 
+	A constructor that creates an object of the Fid class with the given parameter in the form of some integer value representing fid. 
 	If called without parameters, then the default parameter is the STYX_NOFID value from styx2000.protoconst.base. 
     Params:
     fid = Unique 32-bit value assigned by the Styx client.
     
     Typical usage:
     ----
-    Fid afid = new Fid(0);
+    Fid fid = new Fid(0);
     ----
     */
 	this(uint fid = STYX_NOFID)
