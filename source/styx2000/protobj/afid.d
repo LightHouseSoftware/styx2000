@@ -33,6 +33,7 @@ class Afid : Fid
 	If called without parameters, then the default parameter is the STYX_NOFID value from styx2000.protoconst.base. 
     Params:
     fid = Unique 32-bit value assigned by the Styx client.
+    
     Typical usage:
     ----
     Afid afid = new Afid(0);

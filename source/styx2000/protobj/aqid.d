@@ -39,6 +39,7 @@ class Aqid : Qid
 	type = Type of qid,
     vers = Unique 32-bit version number for file or directory,
     path = Unique 64-bit path number for file or directory.
+    
     Typical usage:
     ----
     Aqid aname = new Aname(STYX_QID_TYPE.QTFILE, 0, 12345678);
