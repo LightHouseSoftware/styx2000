@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+A type for representing the qid object of the 9P / Styx protocol. 
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev
+*/
 module styx2000.protobj.qid;
 
 private {
@@ -13,7 +23,11 @@ public {
 	import styx2000.protoconst.qids;
 }
 
-// qid identificator (unique number on server)
+/**
+	A class that provides a type for the qid field in some Styx messages. Inherits methods from the StyxObject class. 
+	See_Also:
+		https://web.archive.org/web/20201029184954/https://powerman.name/Inferno/man/5/0intro.html
+*/
 class Qid : StyxObject
 {
 	protected {
@@ -27,7 +41,19 @@ class Qid : StyxObject
 		ubyte[] _representation;
 	}
 	
-	// create from value
+	/**
+	A constructor that creates a unique qid number based on the parameters passed to it. 
+	If it is called without parameters, then the type will be STYX_QID_TYPE.QTFILE and zero values for the remaining parameters. 
+    Params:
+	type = Type of qid.
+    vers = Unique 32-bit version number for file or directory.
+    path = Unique 64-bit path number for file or directory.
+    
+    Typical usage:
+    ----
+    Qid qid = new Qid(STYX_QID_TYPE.QTFILE, 0, 12345678);
+    ----
+    */
 	this(STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0)
 	{
 		_type = type;
@@ -38,48 +64,52 @@ class Qid : StyxObject
 		_representation ~= toLEBytes!ulong(path);
 	}
 	
-	// getter
+	/// Get Qid type from Qid object
 	STYX_QID_TYPE getType()
 	{
 		return _type;
 	}
 	
+	/// Get version from Qid object
 	uint getVers()
 	{
 		return _vers;
 	}
 	
+	/// Get path from Qid object
 	ulong getPath()
 	{
 		return _path;
 	}
 	
-	// setter
+	/// Set type from STYX_QID_TYPE value
 	void setType(STYX_QID_TYPE type)
 	{
 		_type = type;
 		_representation[0] = cast(ubyte) type;
 	}
 	
+	/// Set version from unsigned value
 	void setVers(uint vers)
 	{
 		_vers = vers;
 		_representation[1..5] = toLEBytes!uint(vers);
 	}
 	
+	/// Set path from unsigned value
 	void setPath(ulong path)
 	{
 		_path = path;
 		_representation[5..13] = toLEBytes!ulong(path);
 	}
 	
-	// pack to bytes array
+	/// Pack to bytes array
 	ubyte[] pack()
 	{
 		return _representation;
 	}
 	
-	// unpack from bytes array
+	/// Unpack from bytes array
 	void unpack(ubyte[] bytes...)
 	{
 		_representation = bytes[0..13];
@@ -88,7 +118,7 @@ class Qid : StyxObject
 		_path = fromLEBytes!ulong(bytes[5..13]);
 	}
 	
-	// string representation
+	/// Convenient string representation of an object for printing 
 	override string toString()
 	{
 		return format(
@@ -99,5 +129,6 @@ class Qid : StyxObject
 		);
 	}
 	
+	/// An alias for easier packing into a byte array without having to manually call the pack() method
 	alias pack this;
 }
