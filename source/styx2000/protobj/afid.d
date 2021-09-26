@@ -8,7 +8,6 @@ License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Softwa
 Authors:   Oleg Bakharev,
 		   Ilya Pertsev
 */
-
 module styx2000.protobj.afid;
 
 private {

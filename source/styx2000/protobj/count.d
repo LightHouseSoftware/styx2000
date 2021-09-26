@@ -27,11 +27,11 @@ class Count : Size
 {
 	/**
 	A constructor that creates an object of the Count class with the given parameter in the form of some integer value representing number of bytes. 
-	If called without parameters, then the default parameter is zero. 
-    Params:
+	If called without parameters, then the default parameter is zero.
+	Params:
     count = Count of bytes.
     
-    Typical usage:
+	Typical usage:
     ----
     Count count = new Count(0);
     ----
