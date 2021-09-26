@@ -32,7 +32,7 @@ class Aname : Name
     name = String value for selected file tree on server.
     Typical usage:
     ----
-    Aname afid = new Aname(`test`);
+    Aname aname = new Aname(`test`);
     ----
     */
 	this(string name = "")
