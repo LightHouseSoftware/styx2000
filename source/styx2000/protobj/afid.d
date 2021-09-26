@@ -57,6 +57,6 @@ class Afid : Fid
 		);
 	}
 	
-	/// An alias for easier packing into a byte array without having to manually call the pack () method
+	/// An alias for easier packing into a byte array without having to manually call the pack() method
 	alias pack this;
 }
