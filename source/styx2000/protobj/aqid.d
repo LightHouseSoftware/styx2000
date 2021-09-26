@@ -36,8 +36,8 @@ class Aqid : Qid
 	A constructor that creates a unique qid number based on the parameters passed to it. 
 	If it is called without parameters, then the type will be STYX_QID_TYPE.QTFILE and zero values for the remaining parameters. 
     Params:
-	type = Type of qid,
-    vers = Unique 32-bit version number for file or directory,
+	type = Type of qid.
+    vers = Unique 32-bit version number for file or directory.
     path = Unique 64-bit path number for file or directory.
     
     Typical usage:
