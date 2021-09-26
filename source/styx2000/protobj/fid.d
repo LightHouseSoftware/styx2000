@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+A type for representing the fid object of the 9P / Styx protocol. 
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev
+*/
 module styx2000.protobj.fid;
 
 private {
@@ -10,7 +20,11 @@ private {
 	import styx2000.protobj.styxobject;
 }
 
-// file identificator
+/**
+	A class that provides a type for the fid field in some Styx messages. Inherits methods from the Fid class and the StyxObject class. 
+	See_Also:
+		https://web.archive.org/web/20201029184954/https://powerman.name/Inferno/man/5/0intro.html
+*/
 class Fid : StyxObject
 {
 	protected {
@@ -19,40 +33,50 @@ class Fid : StyxObject
 		ubyte[] _representation;
 	}
 	
-	// create from value
+	/**
+	A constructor that creates an object of the Afid class with the given parameter in the form of some integer value representing fid. 
+	If called without parameters, then the default parameter is the STYX_NOFID value from styx2000.protoconst.base. 
+    Params:
+    fid = Unique 32-bit value assigned by the Styx client.
+    
+    Typical usage:
+    ----
+    Fid afid = new Fid(0);
+    ----
+    */
 	this(uint fid = STYX_NOFID)
 	{
 		_fid = fid;
 		_representation = toLEBytes!uint(fid);
 	}
 	
-	// getter
+	/// Get unsigned value from Fid object
 	uint getFid()
 	{
 		return _fid;
 	}
 	
-	// setter
+	/// Set value for data from unsigned value
 	void setFid(uint fid)
 	{
 		_fid = fid;
 		_representation = toLEBytes!uint(fid);
 	}
 	
-	// pack to bytes array
+	/// Pack to bytes array
 	ubyte[] pack()
 	{
 		return _representation;
 	}
 	
-	// unpack from bytes array
+	/// Unpack from bytes array
 	void unpack(ubyte[] bytes...)
 	{
 		_representation = bytes[0..4];
 		_fid = fromLEBytes!uint(bytes[0..4]);
 	}
 	
-	// string representation
+	/// Convenient string representation of an object for printing 
 	override string toString()
 	{
 		return format(
@@ -61,5 +85,6 @@ class Fid : StyxObject
 		);
 	}
 	
+	/// An alias for easier packing into a byte array without having to manually call the pack() method
 	alias pack this;
 }
