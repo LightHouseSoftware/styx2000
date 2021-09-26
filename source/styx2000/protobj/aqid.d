@@ -42,7 +42,7 @@ class Aqid : Qid
     
     Typical usage:
     ----
-    Aqid aname = new Aname(STYX_QID_TYPE.QTFILE, 0, 12345678);
+    Aqid aqid = new Aqid(STYX_QID_TYPE.QTFILE, 0, 12345678);
     ----
     */
 	this(STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0)
