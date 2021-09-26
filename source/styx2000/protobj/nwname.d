@@ -66,7 +66,7 @@ class Nwname : StyxObject
     
     Typical usage:
     ----
-    Nwname aname = new Nwname([`test`]);
+    Nwname nwname = new Nwname([`test`]);
     ----
     */
 	this(string[] nwname = [])
