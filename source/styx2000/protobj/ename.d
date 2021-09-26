@@ -16,6 +16,9 @@ class Ename : Name
 		super(name);
 	}
 	
+	alias getEname = getName;	
+	alias setEname = setName;	
+	
 	// string representation
 	override string toString()
 	{

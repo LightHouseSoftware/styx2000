@@ -17,6 +17,7 @@ class Count : Size
 	}
 	
 	alias getCount = getSize;
+	alias setCount = setSize;
 	
 	// string representation
 	override string toString()

@@ -16,6 +16,9 @@ class Msize : Size
 		super(size);
 	}
 	
+	alias getMsize = getSize;	
+	alias setMsize = setSize;	
+	
 	// string representation
 	override string toString()
 	{

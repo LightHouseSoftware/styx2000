@@ -16,6 +16,9 @@ class Uname : Name
 		super(name);
 	}
 	
+	alias getUname = getName;	
+	alias setUname = setName;	
+	
 	override string toString()
 	{
 		return format(

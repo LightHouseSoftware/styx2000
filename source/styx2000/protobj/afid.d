@@ -18,6 +18,9 @@ class Afid : Fid
 		super(fid);
 	}
 	
+	alias getAfid = getFid;	
+	alias setAfid = setFid;	
+	
 	// string representation
 	override string toString()
 	{

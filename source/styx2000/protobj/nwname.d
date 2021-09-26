@@ -71,6 +71,9 @@ class Nwname : StyxObject
 		return _nwname;
 	}
 	
+	alias getNwname = getName;	
+	alias setNwname = setName;	
+	
 	// pack to bytes array
 	ubyte[] pack()
 	{

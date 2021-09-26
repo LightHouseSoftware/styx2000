@@ -14,7 +14,10 @@ class Aname : Name
 	this(string name = "")
 	{
 		super(name);
-	}	
+	}
+	
+	alias getAname = getName;	
+	alias setAname = setName;	
 	
 	// string representation
 	override string toString()
