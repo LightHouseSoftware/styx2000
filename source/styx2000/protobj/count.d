@@ -26,14 +26,14 @@ private {
 class Count : Size
 {
 	/**
-	A constructor that creates an object of the Count class with the given parameter in the form of some integer value representing number of bytes. 
+	A constructor that creates an object of the Count class with the given parameter in the form of unsigned value. 
 	If called without parameters, then the default parameter is zero.
 	Params:
-    count = Count of bytes.
+    size = Number of unsigned bytes.
     
     Typical usage:
     ----
-    Count count = new Count(8);
+    Count count = new Count(0);
     ----
     */
 	this(uint size = 0)

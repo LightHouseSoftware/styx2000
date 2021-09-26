@@ -50,7 +50,7 @@ class Data : StyxObject
 		return _representation;
 	}
 	
-	/// Set value for data from bytes array
+	/// Set value for Data from bytes array
 	void setData(ubyte[] data...)
 	{
 		_representation = data;
