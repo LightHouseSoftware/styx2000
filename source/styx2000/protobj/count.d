@@ -31,9 +31,9 @@ class Count : Size
 	Params:
     count = Count of bytes.
     
-	Typical usage:
+    Typical usage:
     ----
-    Count count = new Count(0);
+    Count count = new Count(8);
     ----
     */
 	this(uint size = 0)
