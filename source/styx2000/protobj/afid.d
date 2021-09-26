@@ -22,7 +22,9 @@ private {
 }
 
 /**
-	A class that provides a type for the afid field in some Styx messages. Inherits methods from the Fid class and the styxObject class. 
+	A class that provides a type for the afid field in some Styx messages. Inherits methods from the Fid class and the StyxObject class. 
+	See_Also:
+		https://web.archive.org/web/20201029184954/https://powerman.name/Inferno/man/5/0intro.html
 */
 class Afid : Fid
 {
