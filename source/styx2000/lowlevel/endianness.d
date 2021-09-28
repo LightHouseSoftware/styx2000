@@ -70,3 +70,15 @@ auto fromLEBytes(T)(ubyte[] bytes...)
 {
 	return EndianSequence.unpack!T(BYTE_ORDER.LITTLE_ENDIAN, bytes);
 }
+
+// to big endian bytes
+auto toBEBytes(T)(T value)
+{
+	return EndianSequence.pack!T(BYTE_ORDER.BIG_ENDIAN, value);
+}
+
+// from big endian bytes
+auto fromBEBytes(T)(ubyte[] bytes...)
+{
+	return EndianSequence.unpack!T(BYTE_ORDER.BIG_ENDIAN, bytes);
+}
