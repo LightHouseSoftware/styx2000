@@ -1,8 +1,11 @@
-module styx2000.extrautil.msgrt;
+module styx2000.extrautil.casts;
 
 private {
 	import styx2000.protoconst.messages;
-	import styx2000.protobj.type;
+	
+	import styx2000.protomsg.typeconv;
+	
+	import styx2000.protobj;
 }
 
 // transform to R-message type
@@ -134,3 +137,53 @@ auto toTtype(Type type)
 	}
 	return ttype;
 }
+
+// conversion from StyxObject to various protocol objects
+alias toAfid = fromStyxObject!Afid;
+
+alias toAname = fromStyxObject!Aname;
+
+alias toAqid = fromStyxObject!Aqid;
+
+alias toCount = fromStyxObject!Count;
+
+alias toData = fromStyxObject!Data;
+
+alias toEname = fromStyxObject!Ename;
+
+alias toFid = fromStyxObject!Fid;
+
+alias toIounit = fromStyxObject!Iounit;
+
+alias toMode = fromStyxObject!Mode;
+
+alias toMsize = fromStyxObject!Msize;
+
+alias toName = fromStyxObject!Name;
+
+alias toNewFid = fromStyxObject!NewFid;
+
+alias toNwname = fromStyxObject!Nwname;
+
+alias toNwqid = fromStyxObject!Nwqid;
+
+alias toOffset = fromStyxObject!Offset;
+
+alias toOldTag = fromStyxObject!OldTag;
+
+alias toPerm = fromStyxObject!Perm;
+
+alias toQid = fromStyxObject!Qid;
+
+alias toSize = fromStyxObject!Size;
+
+alias toStat = fromStyxObject!Stat;
+
+alias toVersion = fromStyxObject!Version;
+
+alias toTag = fromStyxObject!Tag;
+
+alias toType = fromStyxObject!Type;
+
+alias toUname = fromStyxObject!Uname;
+
