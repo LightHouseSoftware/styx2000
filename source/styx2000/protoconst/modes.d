@@ -1,18 +1,18 @@
 module styx2000.protoconst.modes;
 
-// file mode for open/create messages
+/// File mode for open/create messages
 enum STYX_FILE_MODE : ubyte
 {
-	// read only
+	/// Read only
 	OREAD   = 0x00,
-	// write only
+	/// write only
 	OWRITE  = 0x01,
-	// read-write
+	/// Read-write
 	ORDWR   = 0x02,
-	// execute
+	/// Execute
 	OEXEC   = 0x03,
-	// truncate file
+	/// Truncate file
 	OTRUNC  = 0x10,
-	// remove file after closing
+	/// Remove file after closing
 	ORCLOSE = 0x40
 }
