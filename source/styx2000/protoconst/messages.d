@@ -25,7 +25,7 @@ enum STYX_MESSAGE_TYPE : ubyte
     T_ATTACH   = 104,
     /// Attach message (server)
     R_ATTACH   = 105,
-    /// Error message ()
+    /// Error message (only server, for client analog isn't exists)
     R_ERROR    = 107,
     /// Flush message (client)
     T_FLUSH	   = 108,
