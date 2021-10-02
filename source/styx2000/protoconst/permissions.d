@@ -21,7 +21,7 @@ enum STYX_FILE_PERMISSION : uint
 	DMEXCL   	= 0x20000000,
 	/// Authentication file
 	DMAUTH	 	= 0x08000000,
-	/// Temporary file (directory?file is not included in nightly archive)
+	/// Temporary file (directory/file is not included in nightly archive)
 	DMTMP       = 0x04000000,
 	
 	/// Owner permission for reading
