@@ -17,7 +17,7 @@ private {
 /**
 	A class that provides methods for unpacking and packing sequences of bytes into an array of unsigned bytes with an indicator of the number of elements in the sequence. 
 	The number of elements is written in little-endian byte order at the beginning of each variable-length sequence and is the two bytes preceding the main data. 
-	The static methods of this class allow packing and unpacking 9P / Styx protocol sequences (hereinafter we will denote such sequences as VLS - Variable Length Sequences).
+	The static methods of this class allow packing and unpacking 9P / Styx protocol sequences (hereinafter we will denote such sequences as `VLS` - `Variable Length Sequences`).
 */
 class VariableLengthSequence
 {

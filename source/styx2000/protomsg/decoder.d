@@ -13,7 +13,7 @@ public {
 }
 
 private {
-	// decode fields with using only types list
+	/// Decode fields with using only types list
 	auto decodeMessageFields(E...)(ubyte[] bytes...)
 	{
 		E listOfTypes;
@@ -32,7 +32,7 @@ private {
 		return msg;
 	}
 	
-	// decode message based on message type
+	/// Decode message based on message type
 	auto decodeMessageFields(Type type, ubyte[] bytes...)
 	{
 		StyxObject[] msg;
@@ -144,6 +144,20 @@ private {
 	}
 }
 
+/**
+Decodes the received set of bytes into 9P / Styx protocol objects.
+Params:
+bytes = Array of unsigned bytes that represents message.
+
+Typical usage:
+----
+import std.stdio;
+auto msg = decode([73, 0, 0, 0, 125, 1, 0, 64, 0, 62, 0, 77, 0, 4, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 253, 1, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 116, 101, 115, 116, 5, 0, 100, 117, 115, 101, 114, 6, 0, 100, 95, 117, 115, 101, 114, 0, 0]
+);
+// prints [Size(size=73), R_STAT, Tag(tag=0x0001), Stat(type=77, dev=4, qid=Qid(type=QTDIR, vers=0, path=0), mode=Permissions(perm=0x800001fd), atime=0, mtime=0, length=0, name="test", uid="duser", gid="d_user", muid="")
+msg.writeln;
+----
+*/
 auto decode(ubyte[] bytes...)
 {
 	StyxObject[] msg; 
