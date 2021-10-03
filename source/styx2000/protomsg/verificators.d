@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+Module for various 9P /Styx objects checks. For internal use only. 
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev
+*/
 module styx2000.protomsg.verificators;
 
 private {
@@ -11,7 +21,7 @@ private {
 	 import styx2000.protomsg.typeconv;
 }
 
-// message has right count of styx objects
+/// Message has right count of styx objects ?
 auto hasValidFieldsCount(Type type, StyxObject[] msg...)
 {
 	ulong fieldsCount;
@@ -123,7 +133,7 @@ auto hasValidFieldsCount(Type type, StyxObject[] msg...)
 	return (messageFieldsCount == fieldsCount);
 }
 
-// all fields in styx message has right (for concrete type of message
+/// All fields in styx message has right (for concrete type of message) ?
 auto hasValidFieldsTypes(E...)(StyxObject[] msg...)
 {
 	bool isAllTypesValid = true;
@@ -138,7 +148,7 @@ auto hasValidFieldsTypes(E...)(StyxObject[] msg...)
 	return isAllTypesValid;
 }
 
-// message has right count of styx objects
+/// Message has right count of styx objects (for some message type)?
 auto hasValidFieldsTypes(Type type, StyxObject[] msg...)
 {
 	bool isAllTypesValid = false;		

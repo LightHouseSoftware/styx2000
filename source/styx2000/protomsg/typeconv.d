@@ -55,7 +55,7 @@ alias Rflush = Tuple!(Size, Type, Tag);
 alias Tattach = Tuple!(Size, Type, Tag, Fid, Afid, Uname, Aname);
 
 /// This tuple of types mimics the structure of the corresponding message, which looks like this:
-/// size[4] Rattach tag[2] qid[13]
+/// `size[4] Rattach tag[2] qid[13]`
 alias Rattach = Tuple!(Size, Type, Tag, Qid);
 
 /// This tuple of types mimics the structure of the corresponding message, which looks like this:
