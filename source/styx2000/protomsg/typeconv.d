@@ -49,7 +49,7 @@ alias Tattach = Tuple!(Size, Type, Tag, Fid, Afid, Uname, Aname);
 /// size[4] Rattach tag[2] qid[13]
 alias Rattach = Tuple!(Size, Type, Tag, Qid);
 
-/// size[4] Twalk tag[2] fid[4] newfid[4] nwname[2] nwname*(wname[s])
+/// `size[4] Twalk tag[2] fid[4] newfid[4] nwname[2] nwname*(wname[s])`
 alias Twalk = Tuple!(Size, Type, Tag, Fid, Fid, Nwname);
 
 /// `size[4] Rwalk tag[2] nwqid[2] nwqid*(wqid[13])`
