@@ -95,25 +95,72 @@ class EndianSequence
 }
 
 
-/// To little endian bytes
+
+/**
+Parse a value into bytes in little-endian order. Helper for EndianSequence.pack with preset Little Endian byte order (LE).
+Params:
+value = Value for parsing.
+Returns: An array of unsigned bytes representing the value passed as a parameter in little-endian order
+
+
+Typical usage:
+----
+ubyte[] tmp = toLEBytes!uint(150_000);
+----
+*/
 auto toLEBytes(T)(T value)
 {
 	return EndianSequence.pack!T(BYTE_ORDER.LITTLE_ENDIAN, value);
 }
 
-/// From little endian bytes
+/**
+Construct a value from bytes fed in little-endian order. Helper for EndianSequence.unpack with preset Little Endian byte order (LE).
+Params:
+bytes = An array of unsigned bytes (little-endian-order).
+Returns: The value retrieved from the array
+
+
+Typical usage:
+----
+// value is 0x00efcdab in hex or 15715755 in dec  
+uint tmp = fromLEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
+----
+*/
 auto fromLEBytes(T)(ubyte[] bytes...)
 {
 	return EndianSequence.unpack!T(BYTE_ORDER.LITTLE_ENDIAN, bytes);
 }
 
-/// To big endian bytes
+/**
+Parse a value into bytes in big-endian order. Helper for EndianSequence.pack with preset Big Endian byte order (BE).
+Params:
+value = Value for parsing.
+Returns: An array of unsigned bytes representing the value passed as a parameter in little-endian order
+
+
+Typical usage:
+----
+ubyte[] tmp = toBEBytes!uint(150_000);
+----
+*/
 auto toBEBytes(T)(T value)
 {
 	return EndianSequence.pack!T(BYTE_ORDER.BIG_ENDIAN, value);
 }
 
-/// From big endian bytes
+/**
+Construct a value from bytes fed in big-endian order. Helper for EndianSequence.unpack with preset Big Endian byte order (BE).
+Params:
+bytes = An array of unsigned bytes (big-endian-order).
+Returns: The value retrieved from the array
+
+
+Typical usage:
+----
+// value is 0xabcdef00 in hex or 2882400000 in dec
+uint tmp = fromBEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
+----
+*/
 auto fromBEBytes(T)(ubyte[] bytes...)
 {
 	return EndianSequence.unpack!T(BYTE_ORDER.BIG_ENDIAN, bytes);
