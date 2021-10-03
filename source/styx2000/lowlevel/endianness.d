@@ -62,7 +62,7 @@ class EndianSequence
 	Deconstructs (saves) a passed value to unsigned byte array.
     Params:
 	byteOrder = Byte order for value (little or big endian).
-    bytes = Array of unsigned bytes for reconstructing value.
+    value = Value for deconstructing.
     
     Typical usage:
     ----
@@ -113,7 +113,7 @@ auto toBEBytes(T)(T value)
 	return EndianSequence.pack!T(BYTE_ORDER.BIG_ENDIAN, value);
 }
 
-// from big endian bytes
+/// From big endian bytes
 auto fromBEBytes(T)(ubyte[] bytes...)
 {
 	return EndianSequence.unpack!T(BYTE_ORDER.BIG_ENDIAN, bytes);
