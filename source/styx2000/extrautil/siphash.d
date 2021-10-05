@@ -18,7 +18,7 @@ module styx2000.extrautil.siphash;
 	The class provides functionality to initialize the internal state of the SipHash hash function and generate a hash for byte arrays.
 	Params:
 	NUMBER_OF_COMPRESS_ROUNDS = Number of compression rounds (default: 2)
-	NUMBER_OF_FINALIZATION_ROUNDS = number of finalization rounds (default: 4)
+	NUMBER_OF_FINALIZATION_ROUNDS = Number of finalization rounds (default: 4)
 */
 class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_ROUNDS = 4)
 {
@@ -161,6 +161,12 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         v3 ^= key1;
     }
 
+	/**
+	Append bytes to internal hash-function state
+    Params:
+	buffer = Unsigned byte array.
+  
+    */
     void append(ubyte[] buffer...)
     {
         import std.algorithm : min;
@@ -252,6 +258,12 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         byteCount += buffer.length;
     }
 
+	/**
+	Perform finalization of hash-function and returns hash.
+	Returns:
+	64-bit hash of passed bytes
+  
+    */
     ulong finalize()
     {
         return _finalize();

@@ -20,4 +20,6 @@ public {
 	import styx2000.extrautil.dirstat;
 	/// Ranges for working with 9P / Styx messages
 	import styx2000.extrautil.msgranges;
+	/// Implementation of fast 64-bit hash function named SipHash
+	module styx2000.extrautil.siphash;
 }
