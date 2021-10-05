@@ -26,6 +26,7 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
     {
         /// Secret key: 0 - low part of key, 1 - high of key
         ulong key0, key1;
+        
         /// Internal state
         ulong v0 = 0x736f6d6570736575;
         ulong v1 = 0x646f72616e646f6d;
@@ -140,7 +141,11 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         }
     }
 
-	
+	/**
+	Default constructor. 
+	Initializes the internal state of the function with a random 128-bit key (split into two 64-bit parts).
+
+    */
     this()
     {
         import std.random : Random, uniform, unpredictableSeed;
@@ -150,6 +155,14 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         this(uniform(0UL, ulong.max, rng), uniform(0UL, ulong.max, rng));
     }
 
+	/**
+	Basic constructor. 
+	Initializes the internal state with a 128-bit key, split into two 64-bit parts - the low-order and high-order parts of the key.
+	Returns:
+	key0 = low part of key.
+	key1 = high part of key.
+
+    */	
     this(ulong key0, ulong key1)
     {
         key0 = key0;
@@ -162,7 +175,7 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
     }
 
 	/**
-	Append bytes to internal hash-function state
+	Append bytes to internal hash-function state.
     Params:
 	buffer = Unsigned byte array.
   
@@ -270,6 +283,17 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
     }
 }
 
+/**
+Hashes a byte stream with the specified cryptographic key
+Params:
+bytes = Array of unsigned bytes.
+key = Array of two ulong for low and high parts of 128-bit key (default: zero key)
+
+Typical usage:
+----
+auto hash = hash8([0x65, 0x67, 0x67, 0x00]);
+----
+*/
 auto hash8(ubyte[] bytes, ulong[2] key = [0UL, 0UL])
 {
     SipHash!(2, 4) sh = new SipHash!(2, 4)(key[0], key[1]);
@@ -279,6 +303,17 @@ auto hash8(ubyte[] bytes, ulong[2] key = [0UL, 0UL])
     return sh.finalize;
 }
 
+/**
+Hashes a string with the specified cryptographic key
+Params:
+string = String for hashing.
+key = Array of two ulong for low and high parts of 128-bit key (default: zero key)
+
+Typical usage:
+----
+auto hash = hash8(`Sample`);
+----
+*/
 auto hash8(string s, ulong[2] key = [0UL, 0UL])
 {
     SipHash!(2, 4) sh = new SipHash!(2, 4)(key[0], key[1]);
