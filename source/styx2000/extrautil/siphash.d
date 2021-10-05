@@ -2,7 +2,7 @@
 
 /**
 This class provides an implementation of the SipHash cryptographic function.
-Implementation is based on the following code (by Károly Lőrentey): 
+Implementation is based on the following code (by Károly Lőrentey): https://github.com/attaswift/SipHash/blob/master/SipHash/SipHasher.swift
 
 Copyright: LightHouse Software, 2021
 License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
