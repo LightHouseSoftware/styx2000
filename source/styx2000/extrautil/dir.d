@@ -68,7 +68,7 @@ class Dir : Stat
 	alias pack this;
 }
 
-/// convert Stat object to Dir object
+/// Convert Stat object to Dir object
 Dir stat2dir(Stat stat)
 {
 	auto _contents = stat.pack;
@@ -77,7 +77,7 @@ Dir stat2dir(Stat stat)
 	return dir;
 }
 
-/// convert Dir object to Stat object
+/// Convert Dir object to Stat object
 Stat dir2stat(Dir dir)
 {
 	auto _contents = VariableLengthSequence.pack(dir.pack);
