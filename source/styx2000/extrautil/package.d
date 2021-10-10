@@ -22,4 +22,6 @@ public {
 	import styx2000.extrautil.msgranges;
 	/// Implementation of fast 64-bit hash function named SipHash
 	import styx2000.extrautil.siphash;
+	/// Some helpers for working with 9P / Styx messages
+	import styx2000.extrautil.styxmessage;
 }
