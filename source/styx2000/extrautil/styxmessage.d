@@ -223,7 +223,7 @@ auto createRmsgError(ushort tag = STYX_NOTAG, string ename = "")
 /// Create clunk message from client
 auto createTmsgClunk(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
 {
-	return createHeader(0, STYX_MESSAGE_TYPE.R_ERROR, tag) ~ cast(StyxMessage) [
+	return createHeader(0, STYX_MESSAGE_TYPE.T_CLUNK, tag) ~ cast(StyxMessage) [
 		new Fid(fid)
 	];
 }
@@ -232,4 +232,18 @@ auto createTmsgClunk(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
 auto createRmsgClunk(ushort tag = STYX_NOTAG)
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.R_CLUNK, tag);
+}
+
+/// Create flush message from client
+auto createTmsgFlush(ushort tag = STYX_NOTAG, ushort oldTag = STYX_NOTAG)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_FLUSH, tag) ~ cast(StyxMessage) [
+		new OldTag(oldTag)
+	];
+}
+
+/// Create flush message from server
+auto createRmsgFlush(ushort tag = STYX_NOTAG)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_FLUSH, tag);
 }
