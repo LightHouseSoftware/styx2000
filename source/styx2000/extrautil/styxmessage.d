@@ -376,11 +376,3 @@ auto createRmsgWrite(ushort tag = STYX_NOTAG, uint count = 0)
 		new Count(count)
 	];
 }
-
-/// Create stat message from client
-auto createTmsgStat(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
-{
-	return createHeader(0, STYX_MESSAGE_TYPE.T_STAT, tag) ~ cast(StyxMessage) [
-		new Fid(fid)
-	];
-}
