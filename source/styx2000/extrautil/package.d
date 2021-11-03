@@ -18,6 +18,8 @@ public {
 	import styx2000.extrautil.dir;
 	/// Data structure for representing Stat for directories content
 	import styx2000.extrautil.dirstat;
+	/// Additional error constants
+	import styx2000.extrautil.miscerrors;
 	/// Another helpers for styx messages and other stuffs
 	import styx2000.extrautil.mischelpers;
 	/// Ranges for working with 9P / Styx messages
