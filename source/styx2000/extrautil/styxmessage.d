@@ -230,6 +230,25 @@ auto createRmsgAuth(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.
 	];
 }
 
+/// Create attach message from client
+auto createTmsgAttach(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint afid = STYX_NOFID, string uname = "", string aname = "")
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_AUTH, tag) ~ cast(StyxMessage) [
+		new Fid(fid)
+		new Afid(afid),
+		new Uname(uname),
+		new Aname(aname)
+	];
+}
+
+/// Create attach message from server
+auto createRmsgAttach(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_AUTH, tag) ~ cast(StyxMessage) [
+		new Qid(type, vers, path)
+	];
+}
+
 /// Create error message from server (for client this type of message does not exists)
 auto createRmsgError(ushort tag = STYX_NOTAG, string ename = "")
 {
