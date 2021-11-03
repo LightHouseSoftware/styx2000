@@ -212,6 +212,24 @@ auto createRmsgVersion(ushort tag = STYX_NOTAG, uint maximalSize = 8192, string 
 	];
 }
 
+/// Create auth message from client
+auto createTmsgAuth(ushort tag = STYX_NOTAG, uint afid = STYX_NOFID, string uname = "", string aname = "")
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_AUTH, tag) ~ cast(StyxMessage) [
+		new Afid(afid),
+		new Uname(uname),
+		new Aname(aname)
+	];
+}
+
+/// Create auth message from server
+auto createRmsgAuth(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_AUTH, tag) ~ cast(StyxMessage) [
+		new Aqid(type, vers, path)
+	];
+}
+
 /// Create error message from server (for client this type of message does not exists)
 auto createRmsgError(ushort tag = STYX_NOTAG, string ename = "")
 {

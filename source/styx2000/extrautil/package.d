@@ -18,6 +18,8 @@ public {
 	import styx2000.extrautil.dir;
 	/// Data structure for representing Stat for directories content
 	import styx2000.extrautil.dirstat;
+	/// Another helpers for styx messages and other stuffs
+	import styx2000.extrautil.mischelpers;
 	/// Ranges for working with 9P / Styx messages
 	import styx2000.extrautil.msgranges;
 	/// Implementation of fast 64-bit hash function named SipHash
