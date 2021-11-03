@@ -234,7 +234,7 @@ auto createRmsgAuth(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.
 auto createTmsgAttach(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint afid = STYX_NOFID, string uname = "", string aname = "")
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.T_ATTACH, tag) ~ cast(StyxMessage) [
-		new Fid(fid)
+		new Fid(fid),
 		new Afid(afid),
 		new Uname(uname),
 		new Aname(aname)

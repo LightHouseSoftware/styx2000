@@ -41,10 +41,11 @@ auto createQid(string path)
 /// Create Stat object from DirEntry
 auto createStat(DirEntry de, ushort type = 0, ushort dev = 0, string uid = "", string gid = "", string muid = "")
 {
+	auto qid = createQid(de);
 	return new Stat(
 		dev, 
 		type, 
-		createQid(de)
+		qid,
 		new Perm((qid.getType << 24) | (de.attributes & 0x1ff)),
 		cast(uint) de.timeLastAccessed.toUnixTime,
 		cast(uint) de.timeLastModified.toUnixTime, 
