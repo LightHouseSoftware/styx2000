@@ -233,7 +233,7 @@ auto createRmsgAuth(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.
 /// Create attach message from client
 auto createTmsgAttach(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint afid = STYX_NOFID, string uname = "", string aname = "")
 {
-	return createHeader(0, STYX_MESSAGE_TYPE.T_AUTH, tag) ~ cast(StyxMessage) [
+	return createHeader(0, STYX_MESSAGE_TYPE.T_ATTACH, tag) ~ cast(StyxMessage) [
 		new Fid(fid)
 		new Afid(afid),
 		new Uname(uname),
@@ -244,7 +244,7 @@ auto createTmsgAttach(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint afid 
 /// Create attach message from server
 auto createRmsgAttach(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0)
 {
-	return createHeader(0, STYX_MESSAGE_TYPE.R_AUTH, tag) ~ cast(StyxMessage) [
+	return createHeader(0, STYX_MESSAGE_TYPE.R_ATTACH, tag) ~ cast(StyxMessage) [
 		new Qid(type, vers, path)
 	];
 }
@@ -283,4 +283,18 @@ auto createTmsgFlush(ushort tag = STYX_NOTAG, ushort oldTag = STYX_NOTAG)
 auto createRmsgFlush(ushort tag = STYX_NOTAG)
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.R_FLUSH, tag);
+}
+
+/// Create flush message from client
+auto createTmsgRemove(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_REMOVE, tag) ~ cast(StyxMessage) [
+		new Fid(fid)
+	];
+}
+
+/// Create flush message from server
+auto createRmsgRemove(ushort tag = STYX_NOTAG)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_REMOVE, tag);
 }
