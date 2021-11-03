@@ -2,6 +2,7 @@
 
 /**
 This module contains a set of various useful functions for more convenient work with 9P / Styx messages.
+Note: This module contains helpers for building all types of messages, except stat, wstat and walk, since these messages have a complex structure and must be processed directly in the code that forms them.
 
 Copyright: LightHouse Software, 2021
 License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
@@ -300,9 +301,10 @@ auto createRmsgRemove(ushort tag = STYX_NOTAG)
 }
 
 /// Create open message from client
-auto createTmsgOpen(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint afid = STYX_NOFID, STYX_FILE_MODE mode = STYX_FILE_MODE.OREAD)
+auto createTmsgOpen(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, STYX_FILE_MODE mode = STYX_FILE_MODE.OREAD)
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.T_OPEN, tag) ~ cast(StyxMessage) [
+		new Fid(fid),
 		new Mode(mode)
 	];
 }
@@ -316,5 +318,69 @@ auto createRmsgOpen(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.
 	];
 }
 
+/// Create create message from client
+auto createTmsgCreate(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, STYX_FILE_MODE mode = STYX_FILE_MODE.OREAD, STYX_FILE_PERMISSION[] perms = [STYX_FILE_PERMISSION.OWNER_READ, STYX_FILE_PERMISSION.OWNER_WRITE, STYX_FILE_PERMISSION.OWNER_EXEC])
+{
+	auto perm = new Perm;
+	perm.setPerm(perms);
+	return createHeader(0, STYX_MESSAGE_TYPE.T_CREATE, tag) ~ cast(StyxMessage) [
+		new Fid(fid),
+		perm,
+		new Mode(mode)
+	];
+}
 
+/// Create create message from server
+auto createRmsgCreate(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0, uint iounit = 8164)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_CREATE, tag) ~ cast(StyxMessage) [
+		new Qid(type, vers, path),
+		new Iounit(iounit)
+	];
+}
 
+/// Create read message from client
+auto createTmsgRead(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, ulong offset = 0, uint count = 0)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_READ, tag) ~ cast(StyxMessage) [
+		new Fid(fid),
+		new Offset(offset),
+		new Count(count)
+	];
+}
+
+/// Create read message from server
+auto createRmsgRead(ushort tag = STYX_NOTAG, uint count = 0, ubyte[] data = [])
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_READ, tag) ~ cast(StyxMessage) [
+		new Count(count),
+		new Data(data)
+	];
+}
+
+/// Create write message from client
+auto createTmsgWrite(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, ulong offset = 0, uint count = 0, ubyte[] data = [])
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_WRITE, tag) ~ cast(StyxMessage) [
+		new Fid(fid),
+		new Offset(offset),
+		new Count(count),
+		new Data(data)
+	];
+}
+
+/// Create write message from server
+auto createRmsgWrite(ushort tag = STYX_NOTAG, uint count = 0)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_WRITE, tag) ~ cast(StyxMessage) [
+		new Count(count)
+	];
+}
+
+/// Create stat message from client
+auto createTmsgStat(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_STAT, tag) ~ cast(StyxMessage) [
+		new Fid(fid)
+	];
+}
