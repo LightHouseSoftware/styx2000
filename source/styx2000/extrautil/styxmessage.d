@@ -285,7 +285,7 @@ auto createRmsgFlush(ushort tag = STYX_NOTAG)
 	return createHeader(0, STYX_MESSAGE_TYPE.R_FLUSH, tag);
 }
 
-/// Create flush message from client
+/// Create remove message from client
 auto createTmsgRemove(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.T_REMOVE, tag) ~ cast(StyxMessage) [
@@ -293,8 +293,28 @@ auto createTmsgRemove(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID)
 	];
 }
 
-/// Create flush message from server
+/// Create remove message from server
 auto createRmsgRemove(ushort tag = STYX_NOTAG)
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.R_REMOVE, tag);
 }
+
+/// Create open message from client
+auto createTmsgOpen(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint afid = STYX_NOFID, STYX_FILE_MODE mode = STYX_FILE_MODE.OREAD)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_OPEN, tag) ~ cast(StyxMessage) [
+		new Mode(mode)
+	];
+}
+
+/// Create open message from server
+auto createRmsgOpen(ushort tag = STYX_NOTAG, STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0, uint iounit = 8164)
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_OPEN, tag) ~ cast(StyxMessage) [
+		new Qid(type, vers, path),
+		new Iounit(iounit)
+	];
+}
+
+
+
