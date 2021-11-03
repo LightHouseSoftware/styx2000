@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+This module contains the basic definition of the Dir structure, which is a representation of a folder or file. This structure is not found in the protocol description, but can be useful in the construction of some protocol messages, such as a read message.
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev   
+*/
 module styx2000.extrautil.dir;
 
 private {
@@ -16,9 +26,10 @@ public {
 	import styx2000.protobj.qid;
 }
 
-// directory entry representation in some 9P messages
+/// Directory entry representation in some 9P messages. The constructor parameters are the same as the constructor parameters of the Stat structure.
 class Dir : Stat
 {
+	/// Contruct from raw values: The constructor parameters are the same as the constructor parameters of the Stat structure.
 	this(
 		ushort  type    = 0,
 		uint    dev     = 0,
@@ -36,17 +47,20 @@ class Dir : Stat
 		super(type, dev, qid, mode, atime, mtime, length, name, uid, gid, muid);
 	}
 		
+	/// Pack to byte array	
 	override ubyte[] pack()
 	{
 		return _representation[2..$];
 	}
 	
+	/// Unpack from byte array
 	override void unpack(ubyte[] bytes...)
 	{
 		auto _contents = VariableLengthSequence.pack(bytes);
 		return super.unpack(_contents);
 	}
 	
+	/// String representation of Dir structure
 	override string toString()
 	{
 		return format(
@@ -65,6 +79,7 @@ class Dir : Stat
 		);
 	}
 	
+	/// Pack to binary data
 	alias pack this;
 }
 

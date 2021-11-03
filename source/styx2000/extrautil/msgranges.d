@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+This module contains a set of various functions for work with 9P / Styx messages as ranges.
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev   
+*/
 module styx2000.extrautil.msgranges;
 
 private {
@@ -11,7 +21,7 @@ private {
 }
 
 private {
-	// raw byte range
+	/// Raw byte range
 	struct ByteMessageRange
 	{
 		private {
@@ -20,6 +30,7 @@ private {
 			uint 	_size;
 		}
 		
+		/// Load into range byte array for processing (assume that byte array contains messages as bytes)
 		this(ubyte[] bytes...)
 		{
 			_bytes = bytes;
@@ -45,11 +56,13 @@ private {
 			return isEmpty;
 		}
 		
+		/// Front of range
 		ubyte[] front() {
 			_message = _bytes[0.._size];
 			return _message;
 		}
 		
+		/// Proccess current message
 		void popFront()
 		{
 			_bytes = _bytes[_size..$];
@@ -57,19 +70,19 @@ private {
 	}
 }
 
-// create message range (in byte form) from bytes
+/// Create message range (in byte form) from bytes
 auto byRawMessage(ubyte[] bytes...) 
 {
 	return ByteMessageRange(bytes);
 }
 
-// create StyxObject range from bytes
+/// Create StyxObject range from bytes
 auto byStyxMessage(ubyte[] bytes...) 
 {
 	return bytes.byRawMessage.map!decode;
 }
 
-// create string representation for entire StyxObject array
+/// Create string representation for entire StyxObject array
 auto toTextObject(StyxObject[] msg) 
 {
 	return msg
@@ -78,7 +91,7 @@ auto toTextObject(StyxObject[] msg)
 			.replace(`]`, `}`);
 }
 
-// create string representation range from bytes
+/// Create string representation range from bytes
 auto byTextMessage(ubyte[] bytes...) 
 {
 	return bytes.byStyxMessage.map!toTextObject;

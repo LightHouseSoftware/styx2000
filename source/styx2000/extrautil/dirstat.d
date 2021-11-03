@@ -1,3 +1,13 @@
+// Written in the D programming language.
+
+/**
+This module provides a DirStat structure, which is a folder view containing the Strat structures for a folder. The description of the structure is absent in the Styx protocol, but it can be useful in the formation of some types of messages.
+
+Copyright: LightHouse Software, 2021
+License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
+Authors:   Oleg Bakharev,
+		   Ilya Pertsev   
+*/
 module styx2000.extrautil.dirstat;
 
 private {
@@ -17,7 +27,7 @@ public {
 }
 
 
-// data structure to represent directory with Stat data
+/// Data structure to represent directory with Stat data
 class DirStat : StyxObject
 {
 	protected {
@@ -25,7 +35,7 @@ class DirStat : StyxObject
 		ubyte[] _representation;
 	}
 	
-	// construct
+	/// Construct DirStat
 	this(Dir[] dirs...)
 	{
 		_dirs = dirs;
@@ -36,13 +46,13 @@ class DirStat : StyxObject
 		}
 	}
 	
-	// get directory entries
+	/// Get directory entries
 	Dir[] getDirs()
 	{
 		return _dirs;
 	}
 	
-	// set directory entries
+	/// Set directory entries
 	void setDirs(Dir[] dirs...)
 	{
 		_dirs = dirs;
@@ -54,13 +64,13 @@ class DirStat : StyxObject
 		}
 	}
 	
-	// save to byte array
+	/// Save to byte array
 	ubyte[] pack()
 	{
 		return _representation;
 	}
 	
-	// restore from bytes
+	/// Restore from bytes
 	void unpack(ubyte[] bytes...)
 	{
 		_representation = bytes;
@@ -78,7 +88,7 @@ class DirStat : StyxObject
 		}
 	}
 	
-	// string representation
+	/// String representation of DirStat
 	override string toString()
 	{
 		return format(
@@ -87,5 +97,6 @@ class DirStat : StyxObject
 		);
 	}
 	
+	/// Pack to binary data
 	alias pack this;	
 }

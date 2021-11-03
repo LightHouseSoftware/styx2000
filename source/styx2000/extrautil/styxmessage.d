@@ -1,7 +1,7 @@
 // Written in the D programming language.
 
 /**
-This module contains a set of various useful functions for more convenient work with 9P /Styx messages.
+This module contains a set of various useful functions for more convenient work with 9P / Styx messages.
 
 Copyright: LightHouse Software, 2021
 License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
