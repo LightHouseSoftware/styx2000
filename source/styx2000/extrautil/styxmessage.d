@@ -17,8 +17,10 @@ private {
 	import styx2000.protobj;
 }
 
-/// Convenient alias
+/// Convenient aliases
 alias StyxMessage = StyxObject[];
+/// Convenient alias for array of styx messages (not described in 9P / Styx protocol)
+alias StyxMail = StyxMessage[];
 
 /// StyxMessage is client message ?
 bool isTmessage(StyxMessage msg)
@@ -374,5 +376,25 @@ auto createRmsgWrite(ushort tag = STYX_NOTAG, uint count = 0)
 {
 	return createHeader(0, STYX_MESSAGE_TYPE.R_WRITE, tag) ~ cast(StyxMessage) [
 		new Count(count)
+	];
+}
+
+
+/// Create walk message from client
+auto createTmsgWalk(ushort tag = STYX_NOTAG, uint fid = STYX_NOFID, uint newFid = STYX_NOFID, string[] nwname = []) 
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.T_WALK, tag) ~ cast(StyxMessage) [
+		new Fid(fid),
+		new NewFid(newFid),
+		new Nwname(nwname)
+	];
+}
+
+
+/// Create walk message from server
+auto createRmsgWalk(ushort tag = STYX_NOTAG, Qid[] nwqid = []) 
+{
+	return createHeader(0, STYX_MESSAGE_TYPE.R_WALK, tag) ~ cast(StyxMessage) [
+		new Nwqid(nwqid)
 	];
 }
