@@ -22,7 +22,7 @@ enum STYX_MESSAGE_SIZE
     /// Auth message size (server)
     R_AUTH	   = 4,
     /// Attach message size (client)
-    T_ATTACH   = 4,
+    T_ATTACH   = 7,
     /// Attach message size (server)
     R_ATTACH   = 4,
     /// Error message size (only server, for client analog isn't exists)
