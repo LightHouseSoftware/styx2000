@@ -2,7 +2,7 @@
 
 /**
 This module contains a set of various useful functions for more convenient work with 9P / Styx messages.
-Note: This module contains helpers for building all types of messages (and some other stuff), except stat/wstat, since these messages have a complex structure and must be processed directly in the code that forms them.
+Note: This module contains helpers for building all types of messages (and some other stuff), except stat (R-message) and wstat (T-message), since these messages have a complex structure and must be processed directly in the code that forms them.
 
 Copyright: LightHouse Software, 2021
 License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).
