@@ -95,6 +95,14 @@ class Nwqid : StyxObject
 		updateQids;
 	}
 	
+	/// Convenient aliases for uniformity
+	alias setNwqid = setQid;
+	alias getNwqid = getQid;
+	
+	/// Another aliases
+	alias setQids = setQid;
+	alias getQids = getQid;
+	
 	/// Pack to bytes array
 	ubyte[] pack()
 	{
