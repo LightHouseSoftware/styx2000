@@ -124,3 +124,28 @@ auto toPlan9Nwname(Nwname nwname)
 		
 	return representation;
 }
+
+
+/// Translate Nwqid to their string representation (string are the same as in Plan 9)
+auto toPlan9Nwqid(Nwqid nwqid)
+{
+	string representation = `nwqid `;
+	
+	auto numberOfQids = nwqid.countOfQids;
+	
+	if (numberOfQids == 0)
+	{
+		representation ~= `0 `;
+	}
+	else
+	{
+		representation ~= format(`%d `, numberOfQids);
+		
+		foreach (i, qid; nwqid.getNwqid)
+		{
+			representation ~= format(`%d:%s `, i, qid.toPlan9Qid);
+		}
+	}
+		
+	return representation;
+}
