@@ -14,7 +14,9 @@ private
 {
 	import std.path : baseName;
 	import std.file : DirEntry, SpanMode;
+	import std.range : chunks;
 	import std.stdio : File;
+	import std.string : format, strip;
 	
 	import styx2000.extrautil.siphash : hash8;
 	import styx2000.protobj;
@@ -155,4 +157,55 @@ auto toPlan9Nwqid(Nwqid nwqid)
 auto toPlan9Permissions(Perm perm)
 {
 	return format(`%0.16o`, perm.getPerm);
+}
+
+
+/// Translate Stat to his string representation (string are the same as in Plan 9)
+auto toPlan9Stat(Stat stat)
+{
+	return format(
+		`'%s' '%s' '%s' '%s' q %s m %s at %d mt %d l %d t %d d %d`,
+		stat.getName,
+		stat.getUid,
+		stat.getGid,
+		stat.getMuid,
+		stat.getQid.toPlan9Qid,
+		stat.getMode.toPlan9Permissions,
+		stat.getAtime,
+		stat.getMtime,
+		stat.getLength,
+		stat.getType,
+		stat.getDev
+	);
+}
+
+
+/// Translate data chunks to their string representation (string are the same as in Plan 9)
+auto toPlan9Chunk(Data data, uint count)
+{
+	// raw chunk for pretty printing
+	enum RAW_CHUNK_SIZE = 16 * 4;
+	ubyte[] bytes;
+	
+	string representation;
+	if (count != 0)
+	{
+		bytes = data.getData[0..count];
+	}
+	
+	if (bytes.length > RAW_CHUNK_SIZE)
+	{
+		bytes = bytes[0..RAW_CHUNK_SIZE];
+	}
+	
+	foreach (e; bytes.chunks(4))
+	{
+		foreach (b; e)
+		{
+			representation ~= format(`%0.2x`, b);
+		}
+		representation ~= " ";
+	}
+	
+	return representation.strip;
 }
