@@ -65,7 +65,7 @@ auto createStat(string path, ushort type = 0, ushort dev = 0, string uid = "", s
 }
 
 
-/// Translate Qid to their string representation (string are the same as in Plan 9)
+/// Translate Qid to his string representation (string are the same as in Plan 9)
 auto toPlan9Qid(T : Qid)(T qid)
 {
 	string type;
@@ -101,7 +101,7 @@ auto toPlan9Qid(T : Qid)(T qid)
 }
 
 
-/// Translate Nwname to their string representation (string are the same as in Plan 9)
+/// Translate Nwname to his string representation (string are the same as in Plan 9)
 auto toPlan9Nwname(Nwname nwname)
 {
 	string representation = `nwname `;
@@ -126,7 +126,7 @@ auto toPlan9Nwname(Nwname nwname)
 }
 
 
-/// Translate Nwqid to their string representation (string are the same as in Plan 9)
+/// Translate Nwqid to his string representation (string are the same as in Plan 9)
 auto toPlan9Nwqid(Nwqid nwqid)
 {
 	string representation = `nwqid `;
@@ -148,4 +148,11 @@ auto toPlan9Nwqid(Nwqid nwqid)
 	}
 		
 	return representation;
+}
+
+
+/// Translate permission to his string representation (string are the same as in Plan 9)
+auto toPlan9Permissions(Perm perm)
+{
+	return format(`%0.16o`, perm.getPerm);
 }
