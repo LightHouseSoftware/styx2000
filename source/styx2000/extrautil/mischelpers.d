@@ -19,6 +19,7 @@ private
 	import std.string : format, strip;
 	
 	import styx2000.extrautil.siphash : hash8;
+	import styx2000.extrautil.styxmessage : StyxMessage;
 	import styx2000.protobj;
 }
 
