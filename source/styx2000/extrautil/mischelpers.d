@@ -57,8 +57,45 @@ auto createStat(DirEntry de, ushort type = 0, ushort dev = 0, string uid = "", s
 	);
 }
 
+
 /// Convenient helper for creating Stat object from path string
 auto createStat(string path, ushort type = 0, ushort dev = 0, string uid = "", string gid = "", string muid = "")
 {
 	return createStat(DirEntry(path), type, dev, uid, gid, muid);
+}
+
+
+/// Translate Qid to their string representation (string are the same as in Plan 90
+auto toPlan9Qid(T : Qid)(T qid)
+{
+	string type;
+	
+	final switch (qid.getType) with (STYX_QID_TYPE)
+	{
+		case QTDIR:
+			type = `d`;
+			break;
+		case QTAPPEND:
+			type = `a`;
+			break;
+		case QTEXCL:
+			type = `l`;
+			break;
+		case QTAUTH:
+			type = `u`;
+			break;
+		case QTTMP:
+			type = `t`; // ??? 
+			break;
+		case QTFILE:
+			type = ` `;
+			break;
+	}
+	
+	return format(
+		`(%0.16x %d %s)`,
+		qid.getPath,
+		qid.getVers,
+		type,
+	);
 }
