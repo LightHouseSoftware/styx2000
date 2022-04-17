@@ -65,7 +65,7 @@ auto createStat(string path, ushort type = 0, ushort dev = 0, string uid = "", s
 }
 
 
-/// Translate Qid to their string representation (string are the same as in Plan 90
+/// Translate Qid to their string representation (string are the same as in Plan 9)
 auto toPlan9Qid(T : Qid)(T qid)
 {
 	string type;
@@ -98,4 +98,29 @@ auto toPlan9Qid(T : Qid)(T qid)
 		qid.getVers,
 		type,
 	);
+}
+
+
+/// Translate Nwname to their string representation (string are the same as in Plan 9)
+auto toPlan9Nwname(Nwname nwname)
+{
+	string representation = `nwname `;
+	
+	auto numberOfNames = nwname.countOfNames ;
+	
+	if (numberOfNames == 0)
+	{
+		representation ~= `0 `;
+	}
+	else
+	{
+		representation ~= format(`%d `, numberOfNames);
+		
+		foreach (i, name; nwname.getNwname)
+		{
+			representation ~= format(`%d:%s `, i, name);
+		}
+	}
+		
+	return representation;
 }
