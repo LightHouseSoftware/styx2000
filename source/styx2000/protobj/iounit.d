@@ -61,6 +61,10 @@ class Iounit : StyxObject
 		_representation = toLEBytes!uint(iounit);
 	}
 	
+	/// Convenient aliases for set/get
+	alias getIounit = getUnit;
+	alias setIounit = setUnit;
+	
 	/// Pack to bytes array
 	ubyte[] pack()
 	{
