@@ -158,7 +158,7 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
 	/**
 	Basic constructor. 
 	Initializes the internal state with a 128-bit key, split into two 64-bit parts - the low-order and high-order parts of the key.
-	Returns:
+	Params:
 	key0 = low part of key.
 	key1 = high part of key.
 
@@ -167,6 +167,38 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
     {
         key0 = key0;
         key1 = key1;
+
+        v0 ^= key0;
+        v1 ^= key1;
+        v2 ^= key0;
+        v3 ^= key1;
+    }
+    
+    
+    /**
+	Basic constructor. 
+	Initializes the internal state with a 128-bit key.
+	Params:
+	key = key as array of unsigned bytes.
+
+    */	
+    this(ubyte[] key)
+    {
+		static join8to64(ubyte[] block)
+		{
+			ulong number = block[0];
+	
+			for (byte j = 1; j < 8; j++)
+			{
+				number <<= 8;
+				number |= block[j];
+			}
+	
+			return number;
+		}
+	
+        key0 = join8to64(key[0..8]);
+        key1 = join8to64(key[8..16]);
 
         v0 ^= key0;
         v1 ^= key1;
