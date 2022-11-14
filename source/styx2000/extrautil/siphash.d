@@ -177,7 +177,7 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
     
     /**
 	Basic constructor. 
-	Initializes the internal state with a 128-bit key.
+	Initializes the internal state with a 128-bit key. If key length less than 16 bytes (i.e 128 bit), the key will padded with padding method 2.
 	Params:
 	key = key as array of unsigned bytes.
 
@@ -197,7 +197,17 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
 			return number;
 		}
 	
-        key0 = join8to64(key[0..8]);
+        if (key.length < 16)
+        {
+			key ~= 0x01;
+			
+			while (key.length != 16)
+			{
+				key ~= 0x00;
+			}
+		}
+		
+		key0 = join8to64(key[0..8]);
         key1 = join8to64(key[8..16]);
 
         v0 ^= key0;
