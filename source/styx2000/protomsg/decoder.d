@@ -29,7 +29,7 @@ private {
 		E listOfTypes;
 		StyxObject[] msg;
 		
-		ulong vlsPosition = 0;
+		size_t vlsPosition = 0;
 	
 		foreach (e; listOfTypes)
 		{

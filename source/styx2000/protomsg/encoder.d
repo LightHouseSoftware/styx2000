@@ -122,7 +122,7 @@ auto encode(StyxObject[] msg)
 				throw new Exception(`Bad message content: wrong Styx type in message`);
 			}
 			
-			uint length = 0;
+			size_t length = 0;
 			
 			foreach (f; msg[1..$])
 			{
