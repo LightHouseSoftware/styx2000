@@ -346,6 +346,26 @@ auto hash8(ubyte[] bytes, ulong[2] key = [0UL, 0UL])
 }
 
 /**
+Hashes a byte stream with the specified cryptographic key
+Params:
+bytes = Array of unsigned bytes.
+key = Array of unsigned bytes for 128-bit key (default: zero key)
+
+Typical usage:
+----
+auto hash = hash8([0x65, 0x67, 0x67, 0x00]);
+----
+*/
+auto hash8(ubyte[] bytes, ubyte[] key = [0x0])
+{
+    SipHash!(2, 4) sh = new SipHash!(2, 4)(key);
+
+    sh.append(bytes);
+
+    return sh.finalize;
+}
+
+/**
 Hashes a string with the specified cryptographic key
 Params:
 string = String for hashing.
