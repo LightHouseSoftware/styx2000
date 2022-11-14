@@ -283,29 +283,29 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
 
         switch (left)
         {
-        case 7:
-            pendingBytes |= cast(ulong)(buffer[i + 6]) << 48;
-            goto case;
-        case 6:
-            pendingBytes |= cast(ulong)(buffer[i + 5]) << 40;
-            goto case;
-        case 5:
-            pendingBytes |= cast(ulong)(buffer[i + 4]) << 32;
-            goto case;
-        case 4:
-            pendingBytes |= cast(ulong)(buffer[i + 3]) << 24;
-            goto case;
-        case 3:
-            pendingBytes |= cast(ulong)(buffer[i + 2]) << 16;
-            goto case;
-        case 2:
-            pendingBytes |= cast(ulong)(buffer[i + 1]) << 8;
-            goto case;
-        case 1:
-            pendingBytes |= cast(ulong)(buffer[i]);
-            break;
-        default:
-            break;
+	        case 7:
+	            pendingBytes |= cast(ulong)(buffer[i + 6]) << 48;
+	            goto case;
+	        case 6:
+	            pendingBytes |= cast(ulong)(buffer[i + 5]) << 40;
+	            goto case;
+	        case 5:
+	            pendingBytes |= cast(ulong)(buffer[i + 4]) << 32;
+	            goto case;
+	        case 4:
+	            pendingBytes |= cast(ulong)(buffer[i + 3]) << 24;
+	            goto case;
+	        case 3:
+	            pendingBytes |= cast(ulong)(buffer[i + 2]) << 16;
+	            goto case;
+	        case 2:
+	            pendingBytes |= cast(ulong)(buffer[i + 1]) << 8;
+	            goto case;
+	        case 1:
+	            pendingBytes |= cast(ulong)(buffer[i]);
+	            break;
+	        default:
+	            break;
         }
 
         pendingByteCount = left;
@@ -330,6 +330,8 @@ Hashes a byte stream with the specified cryptographic key
 Params:
 bytes = Array of unsigned bytes.
 key = Array of two ulong for low and high parts of 128-bit key (default: zero key)
+Returns:
+64-bit hash of passed bytes
 
 Typical usage:
 ----
@@ -346,30 +348,12 @@ auto hash8(ubyte[] bytes, ulong[2] key = [0UL, 0UL])
 }
 
 /**
-Hashes a byte stream with the specified cryptographic key
-Params:
-bytes = Array of unsigned bytes.
-key = Array of unsigned bytes for 128-bit key (default: zero key)
-
-Typical usage:
-----
-auto hash = hash8([0x65, 0x67, 0x67, 0x00]);
-----
-*/
-auto hash8(ubyte[] bytes, ubyte[] key = [0x0])
-{
-    SipHash!(2, 4) sh = new SipHash!(2, 4)(key);
-
-    sh.append(bytes);
-
-    return sh.finalize;
-}
-
-/**
 Hashes a string with the specified cryptographic key
 Params:
 string = String for hashing.
 key = Array of two ulong for low and high parts of 128-bit key (default: zero key)
+Returns:
+64-bit hash of passed bytes
 
 Typical usage:
 ----
@@ -381,6 +365,28 @@ auto hash8(string s, ulong[2] key = [0UL, 0UL])
     SipHash!(2, 4) sh = new SipHash!(2, 4)(key[0], key[1]);
 
     sh.append((cast(ubyte[]) s));
+
+    return sh.finalize;
+}
+
+/**
+Hashes a byte stream with the specified cryptographic key
+Params:
+bytes = Array of unsigned bytes.
+key = Array of unsigned bytes for 128-bit key (default: zero key)
+Returns:
+64-bit hash of passed bytes
+
+Typical usage:
+----
+auto hash = hash8([0x65, 0x67, 0x67, 0x00]);
+----
+*/
+auto hash(ubyte[] bytes, ubyte[] key = [0x0])
+{
+    SipHash!(2, 4) sh = new SipHash!(2, 4)(key);
+
+    sh.append(bytes);
 
     return sh.finalize;
 }
