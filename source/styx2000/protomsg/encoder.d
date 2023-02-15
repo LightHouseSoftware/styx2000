@@ -33,7 +33,7 @@ Typical usage:
 import std.stdio;
 // Example of server message (R_STAT)
 
-// intially, zero size of message
+// initially, zero size of message
 Size size = new Size;
 // tag (mark foir message)
 Tag tag = new Tag(1);

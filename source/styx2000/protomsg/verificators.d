@@ -1,7 +1,7 @@
 // Written in the D programming language.
 
 /**
-Module for various 9P /Styx objects checks. For internal use only. 
+Module for various 9P / Styx objects checks. For internal use only. 
 
 Copyright: LightHouse Software, 2021
 License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Software License 1.0).

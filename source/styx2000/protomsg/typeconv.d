@@ -149,5 +149,3 @@ auto toStyxObject(T)(T obj) if (isStyxObject!T)
 {
 	return cast(StyxObject) obj;
 }
-
-

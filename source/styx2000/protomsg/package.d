@@ -13,6 +13,7 @@ module styx2000.protomsg;
 public {
 	/// Decode 9P / Styx message from raw bytes
 	import styx2000.protomsg.decoder;
+	
 	/// Encode 9P / Styx message to raw bytes
 	import styx2000.protomsg.encoder;
 }

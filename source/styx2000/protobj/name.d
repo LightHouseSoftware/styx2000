@@ -20,7 +20,7 @@ private {
 }
 
 /**
-	A class that provides a type for the name field in some Styx messages. Inherits methods from the Name class and the StyxObject class. 
+	A class that provides a type for the name field in some Styx messages. Inherits methods from the StyxObject class. 
 	See_Also:
 		https://web.archive.org/web/20201029184954/https://powerman.name/Inferno/man/5/0intro.html
 */

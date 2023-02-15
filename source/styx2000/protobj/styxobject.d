@@ -18,6 +18,7 @@ interface StyxObject
 {
 	/// Pack (serialize) Styx object to byte array
 	ubyte[] pack();
+	
 	/// Unpack (deserialize) Styx object from byte array
 	void unpack(ubyte[] bytes...);
 }

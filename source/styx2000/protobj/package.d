@@ -31,6 +31,7 @@ public {
 		The class required to represent the `count` object of the Styx protocol. 
 	*/
 	import styx2000.protobj.count;
+	
 	/**
 		The class required to represent the `data` object of the Styx protocol. 
 	*/
@@ -70,10 +71,12 @@ public {
 		The class required to represent the `newfid` object of the Styx protocol. 
 	*/
 	import styx2000.protobj.newfid;
+	
 	/**
 		The class required to represent the `nwname` object of the Styx protocol. 
 	*/
 	import styx2000.protobj.nwname;
+	
 	/**
 		The class required to represent the `nwqid` object of the Styx protocol. 
 	*/
