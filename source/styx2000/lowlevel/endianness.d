@@ -99,10 +99,7 @@ Typical usage:
 ubyte[] tmp = toLEBytes!uint(150_000);
 ----
 */
-auto toLEBytes(T)(T value)
-{
-	return EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).pack!T(value);
-}
+alias toLEBytes = EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).pack;
 
 /**
 Construct a value from bytes fed in little-endian order. Helper for EndianSequence.unpack with preset Little Endian byte order (LE).
@@ -117,10 +114,7 @@ Typical usage:
 uint tmp = fromLEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
 ----
 */
-auto fromLEBytes(T)(ubyte[] bytes...)
-{
-	return EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).unpack!T(bytes);
-}
+alias fromLEBytes = EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).unpack;
 
 /**
 Parse a value into bytes in big-endian order. Helper for EndianSequence.pack with preset Big Endian byte order (BE).
@@ -134,10 +128,7 @@ Typical usage:
 ubyte[] tmp = toBEBytes!uint(150_000);
 ----
 */
-auto toBEBytes(T)(T value)
-{
-	return EndianSequence!(BYTE_ORDER.BIG_ENDIAN).pack!T(value);
-}
+alias toBEBytes = EndianSequence!(BYTE_ORDER.BIG_ENDIAN).pack;
 
 /**
 Construct a value from bytes fed in big-endian order. Helper for EndianSequence.unpack with preset Big Endian byte order (BE).
@@ -152,7 +143,4 @@ Typical usage:
 uint tmp = fromBEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
 ----
 */
-auto fromBEBytes(T)(ubyte[] bytes...)
-{
-	return EndianSequence!(BYTE_ORDER.BIG_ENDIAN).unpack!T(bytes);
-}
+alias fromLEBytes = EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).unpack;
