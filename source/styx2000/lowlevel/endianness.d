@@ -23,7 +23,7 @@ enum BYTE_ORDER
 /**
 	A class that provides functionality for construct and deconstruct values. All methods is static.
 */
-class EndianSequence
+class EndianSequence(BYTE_ORDER byteOrder)
 {	
 	/**
 	Constructs (restores) a value from the passed in byte array.
@@ -33,29 +33,31 @@ class EndianSequence
     
     Typical usage:
     ----
-    uint tmp = EndianSequence.unpack!uint(BYTE_ORDER.LITTLE_ENDIAN, [0xab, 0xcd, 0xef, 0x00]);
+    uint tmp = EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).unpack!uint([0xab, 0xcd, 0xef, 0x00]);
     ----
     */
-	static T unpack(T)(BYTE_ORDER byteOrder, ubyte[] bytes...)
+    private {
+		import std.traits : isBasicType;
+		
+		static auto shiftOf(T)(T i) if (isBasicType!T)
+		{
+			static if (byteOrder == BYTE_ORDER.LITTLE_ENDIAN)
+	            return i << 3;
+	        else
+	            return (T.sizeof - i - 1) << 3;
+		}
+	}
+    
+	static T unpack(T)(ubyte[] bytes...)
     {
-        T mask;
-        size_t shift;
-
+        T result;
+       
         foreach (i, e; bytes)
         {
-            final switch (byteOrder) with (BYTE_ORDER)
-            {
-	            case LITTLE_ENDIAN:
-	                shift = (i << 3);
-	                break;
-	            case BIG_ENDIAN:
-	                shift = ((bytes.length - i - 1) << 3);
-	                break;
-            }
-            mask |= (e << shift);
+            result |= (e << shiftOf(i));
         }
 
-        return mask;
+        return result;
     }
 
 	/**
@@ -66,28 +68,18 @@ class EndianSequence
     
     Typical usage:
     ----
-    ubyte[] tmp = EndianSequence.pack!uint(BYTE_ORDER.LITTLE_ENDIAN, 150_000);
+    ubyte[] tmp = EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).pack!uint(150_000);
     ----
     */
-    static ubyte[] pack(T)(BYTE_ORDER byteOrder, T value)
+    static ubyte[] pack(T)(T value)
     {
         ubyte[] data;
-        T mask = cast(T) 0xff;
-        size_t shift;
+        T mask = T(0xff);
 
         foreach (i; 0 .. T.sizeof)
         {
-            final switch (byteOrder) with (BYTE_ORDER)
-            {
-	            case LITTLE_ENDIAN:
-	                shift = (i << 3);
-	                break;
-	            case BIG_ENDIAN:
-	                shift = ((T.sizeof - i - 1) << 3);
-	                break;
-            }
-
-            data ~= cast(ubyte)((value & (mask << shift)) >> shift);
+			auto shift = shiftOf(i);
+            data ~= cast(ubyte) ((value & (mask << shift)) >> shift);
         }
 
         return data;
@@ -109,7 +101,7 @@ ubyte[] tmp = toLEBytes!uint(150_000);
 */
 auto toLEBytes(T)(T value)
 {
-	return EndianSequence.pack!T(BYTE_ORDER.LITTLE_ENDIAN, value);
+	return EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).pack!T(value);
 }
 
 /**
@@ -127,7 +119,7 @@ uint tmp = fromLEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
 */
 auto fromLEBytes(T)(ubyte[] bytes...)
 {
-	return EndianSequence.unpack!T(BYTE_ORDER.LITTLE_ENDIAN, bytes);
+	return EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).unpack!T(bytes);
 }
 
 /**
@@ -144,7 +136,7 @@ ubyte[] tmp = toBEBytes!uint(150_000);
 */
 auto toBEBytes(T)(T value)
 {
-	return EndianSequence.pack!T(BYTE_ORDER.BIG_ENDIAN, value);
+	return EndianSequence!(BYTE_ORDER.BIG_ENDIAN).pack!T(value);
 }
 
 /**
@@ -162,5 +154,5 @@ uint tmp = fromBEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
 */
 auto fromBEBytes(T)(ubyte[] bytes...)
 {
-	return EndianSequence.unpack!T(BYTE_ORDER.BIG_ENDIAN, bytes);
+	return EndianSequence!(BYTE_ORDER.BIG_ENDIAN).unpack!T(bytes);
 }
