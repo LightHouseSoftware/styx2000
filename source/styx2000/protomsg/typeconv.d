@@ -12,9 +12,7 @@ Authors:   Oleg Bakharev,
 */
 module styx2000.protomsg.typeconv;
 
-private {
-	import styx2000.protobj;
-}
+private import styx2000.protobj;
 
 /// Alias for type tuple
 template Tuple(E...)

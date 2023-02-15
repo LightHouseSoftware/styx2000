@@ -29,7 +29,8 @@ auto hasValidFieldsCount(Type type, StyxObject[] msg...)
 			
 	with (STYX_MESSAGE_TYPE)
 	{
-		switch(type.getType) {
+		switch(type.getType) 
+		{
 			// version
 			case R_VERSION:
 				fieldsCount = STYX_MESSAGE_SIZE.R_VERSION;
@@ -130,6 +131,7 @@ auto hasValidFieldsCount(Type type, StyxObject[] msg...)
 				break;
 		}
 	}
+	
 	return (messageFieldsCount == fieldsCount);
 }
 
@@ -137,14 +139,18 @@ auto hasValidFieldsCount(Type type, StyxObject[] msg...)
 auto hasValidFieldsTypes(E...)(StyxObject[] msg...)
 {
 	bool isAllTypesValid = true;
+	
 	foreach (indexOfField, fieldType; E)
 	{
 		auto castedField = cast(fieldType) msg[indexOfField];
-		if (castedField is null) {
+		
+		if (castedField is null) 
+		{
 			isAllTypesValid = false;
 			break;
 		}
 	}
+	
 	return isAllTypesValid;
 }
 
@@ -152,9 +158,11 @@ auto hasValidFieldsTypes(E...)(StyxObject[] msg...)
 auto hasValidFieldsTypes(Type type, StyxObject[] msg...)
 {
 	bool isAllTypesValid = false;		
+	
 	with (STYX_MESSAGE_TYPE)
 	{
-		switch(type.getType) {
+		switch(type.getType) 
+		{
 			// version
 			case R_VERSION:
 				isAllTypesValid = hasValidFieldsTypes!Rversion(msg);
@@ -255,5 +263,6 @@ auto hasValidFieldsTypes(Type type, StyxObject[] msg...)
 				break;
 		}
 	}
+	
 	return isAllTypesValid;
 }
