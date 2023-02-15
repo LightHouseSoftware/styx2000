@@ -33,7 +33,7 @@ class EndianSequence
     
     Typical usage:
     ----
-    uint tmp = EndianSequence.unpack!uint([0xab, 0xcd, 0xef, 0x00]);
+    uint tmp = EndianSequence.unpack!uint(BYTE_ORDER.LITTLE_ENDIAN, [0xab, 0xcd, 0xef, 0x00]);
     ----
     */
 	static T unpack(T)(BYTE_ORDER byteOrder, ubyte[] bytes...)
@@ -66,7 +66,7 @@ class EndianSequence
     
     Typical usage:
     ----
-    ubyte[] tmp = EndianSequence.pack!uint(150_000);
+    ubyte[] tmp = EndianSequence.pack!uint(BYTE_ORDER.LITTLE_ENDIAN, 150_000);
     ----
     */
     static ubyte[] pack(T)(BYTE_ORDER byteOrder, T value)
@@ -93,7 +93,6 @@ class EndianSequence
         return data;
     }
 }
-
 
 
 /**
