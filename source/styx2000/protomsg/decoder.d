@@ -29,13 +29,13 @@ private {
 		E listOfTypes;
 		StyxObject[] msg;
 		
-		size_t vlsPosition = 0;
+		uint vlsPosition;
 	
 		foreach (e; listOfTypes)
 		{
 			auto messageField = new typeof(e);
 			messageField.unpack(bytes[vlsPosition..$]);
-			vlsPosition += (messageField.length);
+			vlsPosition += cast(uint) (messageField.length);
 			msg ~= cast(StyxObject) messageField;
 		}
 		
@@ -49,7 +49,8 @@ private {
 		
 		with (STYX_MESSAGE_TYPE)
 		{
-			switch(type.getType) {
+			switch(type.getType) 
+			{
 				// version
 				case R_VERSION:
 					msg = decodeMessageFields!Rversion(bytes);
