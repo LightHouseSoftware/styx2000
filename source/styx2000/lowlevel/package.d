@@ -13,6 +13,7 @@ module styx2000.lowlevel;
 public {
 	/// Manipulating with bytes in different endianness
 	import styx2000.lowlevel.endianness;
+	
 	/// Working with variable-length fields in 9P / Styx
 	import styx2000.lowlevel.vls;
 }

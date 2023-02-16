@@ -62,7 +62,7 @@ class VariableLengthSequence
 		
 		if (bytes.length == 0)
 		{
-			throw new Exception(`Wrong Variable Length Field (VLS) size`);
+			throw new Exception(`Wrong size of Variable Length Sequence (VLS)`);
 		}
 		else
 		{
