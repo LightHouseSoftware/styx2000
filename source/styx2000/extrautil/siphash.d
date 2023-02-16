@@ -50,15 +50,11 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         ulong _toLEUlong(ubyte* ptr) @system @nogc
         {
             ulong h = 0x0000000000000000;
-
-            h |= (cast(ulong) ptr[0]);
-            h |= (cast(ulong) ptr[1]) << 8;
-            h |= (cast(ulong) ptr[2]) << 16;
-            h |= (cast(ulong) ptr[3]) << 24;
-            h |= (cast(ulong) ptr[4]) << 32;
-            h |= (cast(ulong) ptr[5]) << 40;
-            h |= (cast(ulong) ptr[6]) << 48;
-            h |= (cast(ulong) ptr[7]) << 56;
+            
+            for (int i = 0; i < 64; i += 8)
+            {
+				h |= (cast(ulong) ptr[i >> 3]) << i;
+			}
 
             return h;
         }
@@ -110,10 +106,12 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         void _compress(ulong m) @nogc
         {
             v3 ^= m;
+            
             for (ubyte i = 0; i < NUMBER_OF_COMPRESS_ROUNDS; i++)
             {
                 _round;
             }
+            
             v0 ^= m;
         }
 
@@ -227,35 +225,37 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
         import std.algorithm : min;
 
         auto i = 0;
+        
         if (pendingByteCount > 0)
         {
             ulong readCount = min(buffer.length, 8 - pendingByteCount);
             ulong m = 0;
+            
             switch (readCount)
             {
-            case 7:
-                m |= cast(ulong)(buffer[6]) << 48;
-                goto case;
-            case 6:
-                m |= cast(ulong)(buffer[5]) << 40;
-                goto case;
-            case 5:
-                m |= cast(ulong)(buffer[4]) << 32;
-                goto case;
-            case 4:
-                m |= cast(ulong)(buffer[3]) << 24;
-                goto case;
-            case 3:
-                m |= cast(ulong)(buffer[2]) << 16;
-                goto case;
-            case 2:
-                m |= cast(ulong)(buffer[1]) << 8;
-                goto case;
-            case 1:
-                m |= cast(ulong)(buffer[0]);
-                break;
-            default:
-                break;
+	            case 7:
+	                m |= cast(ulong)(buffer[6]) << 48;
+	                goto case;
+	            case 6:
+	                m |= cast(ulong)(buffer[5]) << 40;
+	                goto case;
+	            case 5:
+	                m |= cast(ulong)(buffer[4]) << 32;
+	                goto case;
+	            case 4:
+	                m |= cast(ulong)(buffer[3]) << 24;
+	                goto case;
+	            case 3:
+	                m |= cast(ulong)(buffer[2]) << 16;
+	                goto case;
+	            case 2:
+	                m |= cast(ulong)(buffer[1]) << 8;
+	                goto case;
+	            case 1:
+	                m |= cast(ulong)(buffer[0]);
+	                break;
+	            default:
+	                break;
             }
             
             pendingBytes |= m << cast(ulong)(pendingByteCount << 3);
@@ -364,7 +364,7 @@ auto hash8(string s, ulong[2] key = [0UL, 0UL])
 {
     SipHash!(2, 4) sh = new SipHash!(2, 4)(key[0], key[1]);
 
-    sh.append((cast(ubyte[]) s));
+    sh.append(cast(ubyte[]) s);
 
     return sh.finalize;
 }

@@ -15,10 +15,7 @@ module styx2000.protomsg.typeconv;
 private import styx2000.protobj;
 
 /// Alias for type tuple
-template Tuple(E...)
-{
-	alias E Tuple;
-}
+alias Tuple(E...) = E;
 
 /// This tuple of types mimics the structure of the corresponding message, which looks like this:
 /// `size[4] Tversion tag[2] msize[4] version[s]`
