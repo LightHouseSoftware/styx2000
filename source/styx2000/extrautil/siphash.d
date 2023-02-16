@@ -14,11 +14,13 @@ See also:
 */
 module styx2000.extrautil.siphash;
 
+public import styx2000.lowlevel.endianness : BYTE_ORDER;
+
 /**
 	The class provides functionality to initialize the internal state of the SipHash hash function and generate a hash for byte arrays.
 	Params:
-	NUMBER_OF_COMPRESS_ROUNDS = Number of compression rounds (default: 2)
-	NUMBER_OF_FINALIZATION_ROUNDS = Number of finalization rounds (default: 4)
+	NUMBER_OF_COMPRESS_ROUNDS = Number of compression rounds (default: 2).
+	NUMBER_OF_FINALIZATION_ROUNDS = Number of finalization rounds (default: 4).
 */
 class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_ROUNDS = 4)
 {
@@ -316,7 +318,7 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
 	/**
 	Perform finalization of hash-function and returns hash.
 	Returns:
-	64-bit hash of passed bytes
+	64-bit hash of passed bytes.
   
     */
     ulong finalize()
@@ -326,12 +328,12 @@ class SipHash(ubyte NUMBER_OF_COMPRESS_ROUNDS = 2, ubyte NUMBER_OF_FINALIZATION_
 }
 
 /**
-Hashes a byte stream with the specified cryptographic key
+Hashes a byte stream with the specified cryptographic key.
 Params:
 bytes = Array of unsigned bytes.
-key = Array of two ulong for low and high parts of 128-bit key (default: zero key)
+key = Array of two ulong for low and high parts of 128-bit key (default: zero key).
 Returns:
-64-bit hash of passed bytes
+64-bit hash of passed bytes.
 
 Typical usage:
 ----
@@ -348,12 +350,12 @@ auto hash8(ubyte[] bytes, ulong[2] key = [0UL, 0UL])
 }
 
 /**
-Hashes a string with the specified cryptographic key
+Hashes a string with the specified cryptographic key.
 Params:
 string = String for hashing.
-key = Array of two ulong for low and high parts of 128-bit key (default: zero key)
+key = Array of two ulong for low and high parts of 128-bit key (default: zero key).
 Returns:
-64-bit hash of passed bytes
+64-bit hash of passed bytes.
 
 Typical usage:
 ----
@@ -370,12 +372,12 @@ auto hash8(string s, ulong[2] key = [0UL, 0UL])
 }
 
 /**
-Hashes a byte stream with the specified cryptographic key
+Hashes a byte stream with the specified cryptographic key.
 Params:
 bytes = Array of unsigned bytes.
-key = Array of unsigned bytes for 128-bit key (default: zero key)
+key = Array of unsigned bytes for 128-bit key (default: zero key).
 Returns:
-64-bit hash of passed bytes
+64-bit hash of passed bytes.
 
 Typical usage:
 ----
@@ -390,3 +392,92 @@ auto hash(ubyte[] bytes, ubyte[] key = [0x0])
 
     return sh.finalize;
 }
+
+/**
+Create string representation of some value in hexadecimal view with specified byte order.
+Params:
+byteOrder = Order of bytes.
+value = Some value of basic D's type.
+Returns:
+String representation (hexadecimal digits) of value.
+
+Typical usage:
+----
+import std.stdio : writeln;
+
+auto value = 0xabcdef01;
+value.asHexWithOrder!(BYTE_ORDER.BIG_ENDIAN).writeln;    // prints "abcdef01"
+value.asHexWithOrder!(BYTE_ORDER.LITTLE_ENDIAN).writeln; // prints "01efcdab"
+----
+*/
+template asHexWithOrder(BYTE_ORDER byteOrder)
+{
+	private import std.traits : isBasicType;
+	
+	private auto asHexByte(ubyte value) {
+		enum DIGIT   = `0123456789abcdef`;
+		string hexs;
+		
+		hexs ~= DIGIT[value >> 4];
+		hexs ~= DIGIT[value & 0x0f];
+		
+		return hexs;
+	}
+	
+	auto asHexWithOrder(T)(T value) if (isBasicType!T)
+	{
+		string hexs;
+		
+		enum T mask = T(0xff);
+		enum T size = T.sizeof;
+
+        foreach (i; 0..size)
+        {
+            static if (byteOrder == BYTE_ORDER.LITTLE_ENDIAN)
+	            T shift = i << 3;
+	        else
+	            T shift = (size - i - 1) << 3;
+	            
+            auto e = cast(ubyte) ((value & (mask << shift)) >> shift);
+            
+            hexs ~= asHexByte(e);
+        }
+		
+		return hexs;
+	}
+}
+
+/**
+Create string representation of some value in hexadecimal view with big_endian order of digits.
+Params:
+value = Some value of basic D's type.
+Returns:
+String representation (hexadecimal digits) of value.
+
+Typical usage:
+----
+import std.stdio : writeln;
+
+auto value = 0xabcdef01;
+asHexBE(value).writeln; // prints "abcdef01"
+----
+*/
+alias asHexBE = asHexWithOrder!(BYTE_ORDER.BIG_ENDIAN);
+
+
+/**
+Create string representation of some value in hexadecimal view with little_endian order of digits.
+Params:
+value = Some value of basic D's type.
+Returns:
+String representation (hexadecimal digits) of value
+
+Typical usage:
+----
+import std.stdio : writeln;
+
+auto value = 0xabcdef01;
+asHexBE(value).writeln; // prints "01efcdab"
+----
+*/
+alias asHexLE = asHexWithOrder!(BYTE_ORDER.LITTLE_ENDIAN);
