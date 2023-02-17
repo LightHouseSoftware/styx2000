@@ -24,7 +24,7 @@ enum STYX_MESSAGE_ERROR : string
 	LONGSTAT       = "stat structure too long",
 	LONGUSERNAME   = "uid or gid name is too long",
 	LONGVERSION    = "protocol version string too long",
-	MAXOFFSET      = "Maximum offset exceeded",
+	MAXOFFSET      = "maximum offset exceeded",
 	MAXWELEM       = "maximum walk elements exceeded",
 	NULLSTRING     = "NUL in string field",
 	OVERSIZE       = "size of field exceeds size of message",
@@ -35,15 +35,15 @@ enum STYX_MESSAGE_ERROR : string
 	ZEROLEN        = "zero-length message",
 	MAXSIZE 	   = "message exceeds msize"
 	
-	ENEEDNOTAG  = "NOTAG(0xFFFF) Required for Tversion."
-	E9P2000ONLY   = "We only talk 9P2000 Here."
-	ENOAUTH       = "No authentication required."
-	ENEEDNOFID = "No Authentication FID required."
-	ENOALTROOT = "Alternate root requested unavailable."
-	EINVALIDFID = "Supplied FID invalid."
-	EDUPLICATEFID = "Supplied FID exists."
-	ENOTDIR = "Not a directory."
-	EALREADYOPEN = "File already open."
-	ENOTFOUND = "Not found."
-	ENOTOPEN = "File not opened."
+	ENEEDNOTAG    = "STYX_NOTAG(0xffff) required for T_Version"
+	E9P2000ONLY   = "only 9P2000 protocol version"
+	ENOAUTH       = "no authentication required"
+	ENEEDNOFID    = "no authentication fid required"
+	ENOALTROOT    = "alternate root requested unavailable"
+	EINVALIDFID   = "supplied fid invalid"
+	EDUPLICATEFID = "supplied fid exists"
+	ENOTDIR       = "not a directory"
+	EALREADYOPEN  = "file already open"
+	ENOTFOUND     = "not found"
+	ENOTOPEN      = "file not opened"
 }
