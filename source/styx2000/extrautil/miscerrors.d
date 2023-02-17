@@ -34,4 +34,16 @@ enum STYX_MESSAGE_ERROR : string
 	UNDERSIZE      = "empty space in message",
 	ZEROLEN        = "zero-length message",
 	MAXSIZE 	   = "message exceeds msize"
+	
+	ENEEDNOTAG  = "NOTAG(0xFFFF) Required for Tversion."
+	E9P2000ONLY   = "We only talk 9P2000 Here."
+	ENOAUTH       = "No authentication required."
+	ENEEDNOFID = "No Authentication FID required."
+	ENOALTROOT = "Alternate root requested unavailable."
+	EINVALIDFID = "Supplied FID invalid."
+	EDUPLICATEFID = "Supplied FID exists."
+	ENOTDIR = "Not a directory."
+	EALREADYOPEN = "File already open."
+	ENOTFOUND = "Not found."
+	ENOTOPEN = "File not opened."
 }

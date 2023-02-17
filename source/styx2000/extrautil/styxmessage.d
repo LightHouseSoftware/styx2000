@@ -19,6 +19,7 @@ private {
 
 /// Convenient aliases
 alias StyxMessage = StyxObject[];
+
 /// Convenient alias for array of styx messages (not described in 9P / Styx protocol)
 alias StyxMail = StyxMessage[];
 
@@ -415,7 +416,7 @@ auto createRmsgWstat(ushort tag = STYX_NOTAG)
 	return createHeader(0, STYX_MESSAGE_TYPE.R_WSTAT, tag);
 }
 
-/// Calculate real (!) message size
+/// Calculate real (!) message size (in bytes)
 auto calculateMessageSize(StyxMessage msg)
 {
 	ulong realSize = 0;
@@ -441,4 +442,4 @@ auto fixMessageSize(StyxMessage msg)
 	}
 	
 	return cast(StyxMessage) [new Size(realSize)] ~ newMsg;
-} 
+}

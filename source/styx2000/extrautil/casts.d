@@ -23,9 +23,11 @@ private {
 auto toRtype(Type type)
 {		
 	auto rtype = new Type;	
+	
 	with (STYX_MESSAGE_TYPE)
 	{
-		switch(type.getType) {
+		switch(type.getType) 
+		{
 			// version
 			case T_VERSION:
 				rtype.setType(R_VERSION);
@@ -81,6 +83,7 @@ auto toRtype(Type type)
 				throw new Exception("Wrong message type used to get R-message type");
 		}
 	}
+	
 	return rtype;
 }
 
@@ -89,9 +92,11 @@ auto toRtype(Type type)
 auto toTtype(Type type)
 {		
 	auto ttype = new Type;	
+	
 	with (STYX_MESSAGE_TYPE)
 	{
-		switch(type.getType) {
+		switch(type.getType) 
+		{
 			// version
 			case R_VERSION:
 				ttype.setType(T_VERSION);
@@ -147,6 +152,7 @@ auto toTtype(Type type)
 				throw new Exception("Wrong message type used to get T-message type");
 		}
 	}
+	
 	return ttype;
 }
 
@@ -221,4 +227,3 @@ alias toType = fromStyxObject!Type;
 
 /// Conversion from StyxObject to Uname type
 alias toUname = fromStyxObject!Uname;
-
