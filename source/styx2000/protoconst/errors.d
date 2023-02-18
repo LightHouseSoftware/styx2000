@@ -14,26 +14,26 @@ module styx2000.protoconst.errors;
 enum STYX_ERRORS
 {
 	/// Out of memory error
-	ENOMEM    =  `Out of memory`,
+	ENOMEM    =  "Out of memory",
 	
 	/// Permission error
-	EPERM     =  `Permission denied`,
+	EPERM     =  "Permission denied",
 	
 	/// No free devices error
-	ENODEV    =  `No free devices`,
+	ENODEV    =  "No free devices",
 	
 	/// I/O hangup
-	EHUNGUP   =  `I/O on hungup channel`,
+	EHUNGUP   =  "I/O on hungup channel",
 	
 	/// File exists error
-	EEXIST    =  `File exists`,
+	EEXIST    =  "File exists",
 	
 	/// File does not exist
-	ENONEXIST =  `File does not exist`,
+	ENONEXIST =  "File does not exist",
 	
 	/// Bad command error
-	EBADCMD   =  `Bad command`,
+	EBADCMD   =  "Bad command",
 	
 	/// Bad arguments
-	EBADARG   =  `Bad arguments`
+	EBADARG   =  "Bad arguments"
 }
