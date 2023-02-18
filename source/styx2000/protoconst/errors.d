@@ -14,19 +14,26 @@ module styx2000.protoconst.errors;
 enum STYX_ERRORS
 {
 	/// Out of memory error
-	ENOMEM    =  cast(ubyte[]) `Out of memory`,
+	ENOMEM    =  `Out of memory`,
+	
 	/// Permission error
-	EPERM     =  cast(ubyte[]) `Permission denied`,
+	EPERM     =  `Permission denied`,
+	
 	/// No free devices error
-	ENODEV    =  cast(ubyte[]) `No free devices`,
+	ENODEV    =  `No free devices`,
+	
 	/// I/O hangup
-	EHUNGUP   =  cast(ubyte[]) `I/O on hungup channel`,
+	EHUNGUP   =  `I/O on hungup channel`,
+	
 	/// File exists error
-	EEXIST    =  cast(ubyte[]) `File exists`,
+	EEXIST    =  `File exists`,
+	
 	/// File does not exist
-	ENONEXIST =  cast(ubyte[]) `File does not exist`,
+	ENONEXIST =  `File does not exist`,
+	
 	/// Bad command error
-	EBADCMD   =  cast(ubyte[]) `Bad command`,
+	EBADCMD   =  `Bad command`,
+	
 	/// Bad arguments
-	EBADARG   =  cast(ubyte[]) `Bad arguments`
+	EBADARG   =  `Bad arguments`
 }
