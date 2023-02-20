@@ -33,17 +33,17 @@ enum STYX_MESSAGE_ERROR : string
 	TOOSMALL       = "message is too small",
 	UNDERSIZE      = "empty space in message",
 	ZEROLEN        = "zero-length message",
-	MAXSIZE 	   = "message exceeds msize"
+	MAXSIZE 	   = "message exceeds msize",
 	
-	ENEEDNOTAG    = "STYX_NOTAG(0xffff) required for T_Version"
-	E9P2000ONLY   = "only 9P2000 protocol version"
-	ENOAUTH       = "no authentication required"
-	ENEEDNOFID    = "no authentication fid required"
-	ENOALTROOT    = "alternate root requested unavailable"
-	EINVALIDFID   = "supplied fid invalid"
-	EDUPLICATEFID = "supplied fid exists"
-	ENOTDIR       = "not a directory"
-	EALREADYOPEN  = "file already open"
-	ENOTFOUND     = "not found"
-	ENOTOPEN      = "file not opened"
+	ENEEDNOTAG    = "STYX_NOTAG(0xffff) required for T_Version",
+	E9P2000ONLY   = "only 9P2000 protocol version",
+	ENOAUTH       = "no authentication required",
+	ENEEDNOFID    = "no authentication fid required",
+	ENOALTROOT    = "alternate root requested unavailable",
+	EINVALIDFID   = "supplied fid invalid",
+	EDUPLICATEFID = "supplied fid exists",
+	ENOTDIR       = "not a directory",
+	EALREADYOPEN  = "file already open",
+	ENOTFOUND     = "not found",
+	ENOTOPEN      = "file not opened",
 }
