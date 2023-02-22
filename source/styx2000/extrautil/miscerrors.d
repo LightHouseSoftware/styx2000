@@ -17,7 +17,7 @@ enum STYX_MESSAGE_ERROR : string
 	INVALIDQIDTYPE = "invalid type field in qid",
 	INVALIDUTF8    = "string is not valid utf8",
 	LONGANAME      = "aname field too long",
-	LONGMESSAGE    = "or message too long",
+	LONGMESSAGE    = "result message too long",
 	LONGFILENAME   = "file name too long",
 	LONGSIZE       = "size field is longer than actual message size",
 	LONGLENGTH     = "long length field in stat structure",

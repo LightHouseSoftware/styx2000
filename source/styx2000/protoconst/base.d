@@ -12,6 +12,8 @@ module styx2000.protoconst.base;
 
 /// Protocol version (base version, without Linux and any another extension)
 enum string STYX_VERSION = "9P2000";
+/// Unknown version
+enum string STYX_VERSION_UNKNOWN = `unknown`;
 /// No tag value
 enum ushort STYX_NOTAG = 0xFFFF;
 /// No fid value
