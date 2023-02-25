@@ -419,11 +419,11 @@ auto createRmsgWstat(ushort tag = STYX_NOTAG)
 /// Calculate real (!) message size (in bytes)
 auto calculateMessageSize(StyxMessage msg)
 {
-	ulong realSize = 0;
+	uint realSize = 0;
 	
 	foreach (e; msg)
 	{
-		realSize += e.pack.length;
+		realSize += cast(uint) e.pack.length;
 	}
 	
 	return realSize;
@@ -438,7 +438,7 @@ auto fixMessageSize(StyxMessage msg)
 	
 	foreach (e; newMsg)
 	{
-		realSize += e.pack.length;
+		realSize += cast(uint) e.pack.length;
 	}
 	
 	return cast(StyxMessage) [new Size(realSize)] ~ newMsg;
