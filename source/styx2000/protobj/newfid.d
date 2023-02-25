@@ -21,6 +21,3 @@ private {
 
 /// Aliased from Fid class. The methods are the same as for the Fid class.
 alias NewFid = Fid;
-
-/// Convenient alias for getting NewTag
-alias getNewFid = Fid.getFid;

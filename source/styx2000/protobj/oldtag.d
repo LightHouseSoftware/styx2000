@@ -20,6 +20,3 @@ private {
 
 /// Aliased from Tag class. The methods are the same as for the Tag class.
 alias OldTag = Tag;
-
-/// Convenient alias for getting OldTag
-alias getOldTag = Tag.getTag;
