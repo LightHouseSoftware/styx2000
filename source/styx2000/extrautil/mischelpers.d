@@ -25,6 +25,12 @@ private
 	import styx2000.protobj;
 }
 
+/// Create Qid object from Qid type, version and path
+auto createQid(STYX_QID_TYPE type = STYX_QID_TYPE.QTFILE, uint vers = 0, ulong path = 0)
+{
+	return new Qid(type, vers, path);
+}
+
 /// Create Qid object from DirEntry
 auto createQid(DirEntry de)
 {	
