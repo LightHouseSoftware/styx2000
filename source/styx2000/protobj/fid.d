@@ -63,6 +63,11 @@ class Fid : StyxObject
 		_representation = toLEBytes!uint(fid);
 	}
 	
+	/// An alias that allows you to call a getter method for Newfid
+	alias getNewFid = getFid;	
+	/// An alias that allows you to call a setter method for Newfid
+	alias setNewFid = setFid;	
+	
 	/// Pack to bytes array
 	ubyte[] pack()
 	{
