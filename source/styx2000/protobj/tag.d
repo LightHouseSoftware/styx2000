@@ -63,6 +63,11 @@ class Tag : StyxObject
 		_representation = toLEBytes!ushort(tag);
 	}
 	
+	/// An alias that allows you to call a getter method for OldTag
+	alias getOldTag = getTag;	
+	/// An alias that allows you to call a setter method for OldTag
+	alias setOldTag = setTag;
+	
 	/// Pack to bytes array
 	ubyte[] pack()
 	{
