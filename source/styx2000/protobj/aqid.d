@@ -50,11 +50,6 @@ class Aqid : Qid
 		super(type, vers, path);
 	}
 	
-	/// An alias that allows you to call a getter method without accessing the base Qid class
-	alias getAqid = getQid;	
-	/// An alias that allows you to call a setter method without accessing the base Qid class
-	alias setAqid = setQid;	
-	
 	/// Convenient string representation of an object for printing 
 	override string toString()
 	{
