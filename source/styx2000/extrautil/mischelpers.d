@@ -1,4 +1,4 @@
-e// Written in the D programming language.
+// Written in the D programming language.
 
 /**
 This module contains a set of various useful helpers for miscellaneous stuff.
