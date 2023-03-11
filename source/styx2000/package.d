@@ -1,3 +1,4 @@
+/// Minimal library for working with 9P (Styx) protocol
 module styx2000;
 
 public {
