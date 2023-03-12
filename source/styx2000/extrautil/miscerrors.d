@@ -10,6 +10,7 @@ Authors:   Oleg Bakharev,
 */
 module styx2000.extrautil.miscerrors;
 
+/// Some kinds of error that are not included in protoconst/errors module
 enum STYX_ERROR_MESSAGE : string
 {
 	/// Slash in path element

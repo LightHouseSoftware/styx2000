@@ -11,7 +11,7 @@ Authors:   Oleg Bakharev,
 module styx2000.protoconst.errors;
 
 /// Typical error messages in Styx
-enum STYX_ERRORS
+enum STYX_ERROR
 {
 	/// Out of memory error
 	ENOMEM    =  "Out of memory",
