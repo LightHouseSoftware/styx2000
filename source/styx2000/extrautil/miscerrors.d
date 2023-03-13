@@ -93,10 +93,7 @@ enum STYX_ERROR_MESSAGE : string
 	
 	/// Supplied fid invalid
 	EINVALIDFID   = "supplied fid invalid",
-	
-	/// Supplied fid exists
-	EDUPLICATEFID = "supplied fid exists",
-	
+		
 	/// Not a directory
 	ENOTDIR       = "not a directory",
 	
@@ -108,4 +105,40 @@ enum STYX_ERROR_MESSAGE : string
 	
 	/// Not opened
 	ENOTOPEN      = "file not opened",
+	
+	/// Bad offset
+	EBADOFFSET    = "bad offset",
+	
+	/// Botch 9P
+	EBOTCH        = "9P protocol botch",
+	
+	/// Create in non directory
+	ECREATENONDIR = "create in non-directory",
+	
+	/// Duplicate fid
+	EDUPFID 	  = "duplicate fid",
+	
+	/// Duplicate tag
+	EDUPTAG 	  = "duplicate tag",
+	
+	/// Is directory
+	EISDIR 		  = "is a directory",
+	
+	/// Create prohibited
+	ENOCREATE 	  = "create prohibited",
+	
+	/// Remove prohibited
+	ENOREMOVE     = "remove prohibited",
+	
+	/// Stat prohibited
+	ENOSTAT 	  = "stat prohibited",
+	
+	/// Wstat prohibited
+	ENOWSTAT 	  = "wstat prohibited",
+	
+	/// Bad directory in W_STAT
+	EBADDIR 	  = "bad directory in wstat",
+	
+	/// Walk in non directory
+	EWALKNOTDIR   = "walk in non-directory"
 }
