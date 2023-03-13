@@ -198,6 +198,47 @@ auto createHeader(uint size = 0, STYX_MESSAGE_TYPE type = STYX_MESSAGE_TYPE.R_ER
 	];
 }
 
+/// Parse header of Styx message. Returns anonymous struct that contains size, type and tag fields.
+auto extractHeader(StyxMessage msg)
+{
+	struct StyxHeader {
+		/// message size
+		uint size;
+		/// message type
+		STYX_MESSAGE_TYPE type;
+		/// tag
+		ushort tag;
+	}
+	
+	StyxHeader header = StyxHeader(0, STYX_MESSAGE_TYPE.R_ERROR, STYX_NOTAG);
+	
+	if (msg.length >= 3)
+	{
+		auto size = msg[0].toSize;
+		
+		if (size !is null)
+		{
+			header.size = size.getSize;
+		}
+		
+		auto type = msg[1].toType;
+		
+		if (type !is null)
+		{
+			header.type = type.getType;
+		}
+		
+		auto tag = msg[2].toTag;
+		
+		if (tag !is null)
+		{
+			header.tag = tag.getTag;
+		}
+	}
+	
+	return header;
+}
+
 /// Create version message from client
 auto createTmsgVersion(ushort tag = STYX_NOTAG, uint maximalSize = 8192, string vers = STYX_VERSION)
 {
