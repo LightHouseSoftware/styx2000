@@ -453,3 +453,50 @@ auto toPlan9Chunk(Data data, uint count)
 	
 	return representation.strip;
 }
+
+
+/// Translate integer mode (such as 0755) to readable permission string (e.g drwxrwxr-x for 0755)
+auto fromModeToString(uint mode)
+{
+	enum BITS = ["---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx"];
+	
+	auto bits(uint s) 
+	{
+		return BITS[(mode >> s) & 7];
+	}
+	
+	string d = "-";
+    
+    if (mode & STYX_FILE_PERMISSION.DMDIR)
+    {
+        d = "d";
+    }
+   
+	if (mode & STYX_FILE_PERMISSION.DMAPPEND)
+	{
+		d = "a";
+	}
+    
+	if (mode & STYX_FILE_PERMISSION.DMAUTH)
+	{
+		d = "A";
+	}
+	
+	if (mode & STYX_FILE_PERMISSION.DMEXCL)
+	{
+		d ~= "l";
+	}
+	else
+	{
+		d ~= "-";
+	}
+    
+    return format("%s%s%s%s", d, bits(6), bits(3), bits(0));
+}
+
+
+/// Translates Perm object to permission string (e.g drwxrwxr-x)
+auto fromPermissionsToString(Perm perm)
+{
+	return fromModeToString(perm.getPerm);
+}
