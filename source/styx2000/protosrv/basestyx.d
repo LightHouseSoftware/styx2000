@@ -20,6 +20,11 @@ private {
     import styx2000.protobj;
 }
 
+/// Alias for arguments of Styx handlers
+alias StyxArguments = StyxObject[];
+
+
+/// Base class for all Styx servers
 class BaseStyxServer(uint BUFFER_SIZE, uint MAXIMAL_NUMBER_OF_CONNECTIONS, uint MAXIMAL_MESSAGE_SIZE = 8_192) : BaseServer!(BUFFER_SIZE, MAXIMAL_NUMBER_OF_CONNECTIONS)
 {
 	bool DEBUG_MODE = false;
