@@ -22,6 +22,8 @@ private
 	import styx2000.extrautil.siphash : hash8;
 	import styx2000.extrautil.styxmessage : StyxMessage;
 	
+	import styx2000.protoconst.permissions;
+	
 	import styx2000.protobj;
 }
 
