@@ -17,6 +17,7 @@ private {
     import styx2000.extrautil.styxmessage;
     
     import styx2000.protoconst;
+    import styx2000.protomsg;
     import styx2000.protobj;
     
     import styx2000.protosrv.baseserver;
