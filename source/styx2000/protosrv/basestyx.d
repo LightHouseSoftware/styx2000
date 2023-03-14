@@ -18,6 +18,8 @@ private {
     
     import styx2000.protoconst;
     import styx2000.protobj;
+    
+    import styx2000.protosrv.baseserver;
 }
 
 /// Alias for arguments of Styx handlers
