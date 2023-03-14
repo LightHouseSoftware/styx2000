@@ -12,6 +12,8 @@ Authors:   Oleg Bakharev,
 module styx2000.extrautil.styxmessage;
 
 private {
+	import styx2000.extrautil.casts;
+	
 	import styx2000.protoconst;
 	
 	import styx2000.protobj;

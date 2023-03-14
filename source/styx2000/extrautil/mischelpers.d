@@ -500,7 +500,7 @@ auto toPlan9Mode(uint mode)
 /// Translates Perm object to permission string (e.g drwxrwxr-x)
 auto toPlan9Mode(Perm perm)
 {
-	return fromModeToString(perm.getPerm);
+	return toPlan9Mode(perm.getPerm);
 }
 
 
@@ -564,6 +564,6 @@ auto fromPlan9Mode(string mode)
 auto fromPlan9Permissions(string mode)
 {
 	return new Perm(
-		fromStringToPermissions(mode)
+		fromPlan9Mode(mode)
 	);
 }

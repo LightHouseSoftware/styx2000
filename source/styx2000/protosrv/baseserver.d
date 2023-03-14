@@ -8,10 +8,9 @@ License:   $(HTTP https://github.com/aquaratixc/ESL-License, Experimental Softwa
 Authors:   Oleg Bakharev,
 		   Ilya Pertsev   
 */
-module styx2000.baseserver;
+module styx2000.protosrv.baseserver;
 
-private
-{
+private {
     import std.algorithm : remove;
     import std.socket;
 }
