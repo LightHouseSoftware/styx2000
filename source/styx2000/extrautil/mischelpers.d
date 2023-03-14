@@ -456,7 +456,7 @@ auto toPlan9Chunk(Data data, uint count)
 
 
 /// Translate integer mode (such as 0755) to readable permission string (e.g drwxrwxr-x for 0755)
-auto fromModeToString(uint mode)
+auto toPlan9Mode(uint mode)
 {
 	enum BITS = ["---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx"];
 	
@@ -496,7 +496,72 @@ auto fromModeToString(uint mode)
 
 
 /// Translates Perm object to permission string (e.g drwxrwxr-x)
-auto fromPermissionsToString(Perm perm)
+auto toPlan9Mode(Perm perm)
 {
 	return fromModeToString(perm.getPerm);
+}
+
+
+/// Translates string mode (e.g drwxrwxr-x) to integer value 
+auto fromPlan9Mode(string mode)
+{
+	/// bitmaps for all possible permissions
+	enum BITS = ["---" : 0, "--x" : 1, "-w-" : 2, "-wx" : 3, "r--" : 4, "r-x" : 5, "rw-" : 6, "rwx" : 7];
+	uint pms;
+	
+	if (mode.length >= 11)
+	{
+		/// normalizing string (length must be 11 symbols long)
+		mode = mode[0..11];
+		
+		/// recognizing first character
+		switch (mode[0])
+		{
+			case 'd':
+				pms |= STYX_FILE_PERMISSION.DMDIR;
+				break;
+			case 'a':
+				pms |= STYX_FILE_PERMISSION.DMAPPEND;
+				break;
+			case 'A':
+				pms |= STYX_FILE_PERMISSION.DMAUTH;
+				break;
+			default:
+				break;
+		}
+		
+		/// recognizing second character
+		if (mode[1] == 'l')
+		{
+			pms |= STYX_FILE_PERMISSION.DMEXCL;
+		}
+		
+		
+		/// replace two symbols from the beginning
+		mode = mode[2..$];
+		
+		int i = 2;
+				
+		while (i >= 0)
+		{
+			auto m = mode[0..3];
+			pms |= BITS[m] << (3 * i);
+			mode = mode[3..$];
+			i--;
+		}
+	}
+	else
+	{
+		throw new Exception("The permission string must be 11 characters long");
+	}
+	
+	return pms;
+}
+
+/// Translates string mode (e.g drwxrwxr-x) to Perm object
+auto fromPlan9Permissions(string mode)
+{
+	return new Perm(
+		fromStringToPermissions(mode)
+	);
 }
