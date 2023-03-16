@@ -11,5 +11,6 @@ Authors:   Oleg Bakharev,
 module styx2000.protosrv;
 
 public {
-	
+	/// Base class for Styx servers
+	import styx2000.protosrv.basestyx;
 }
