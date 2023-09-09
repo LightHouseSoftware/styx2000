@@ -143,4 +143,4 @@ Typical usage:
 uint tmp = fromBEBytes!uint([0xab, 0xcd, 0xef, 0x00]);
 ----
 */
-alias fromLEBytes = EndianSequence!(BYTE_ORDER.LITTLE_ENDIAN).unpack;
+alias fromBEBytes = EndianSequence!(BYTE_ORDER.BIG_ENDIAN).unpack;
